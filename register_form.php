@@ -56,7 +56,7 @@ if(isset($_POST['submit'])){
 		<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
 
-		<link href="assets/css/style2.css" rel="stylesheet" />
+		<link href="assets/css/styles2.css" rel="stylesheet" />
 
 		<script defer src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script defer src="assets/js/main.js"></script>
