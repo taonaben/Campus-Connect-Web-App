@@ -67,11 +67,10 @@
 						<i class="bi bi-list fs-5"></i>
 					</button>
 					<nav class="d-none d-lg-flex align-items-center">
-						<a href="./index.html" class="active">Home</a>
-						<a href="./accomodation.html">Accomodation</a>
-						<a href="./about.html">About</a>
-						<a href="./signin.html">SignIn</a>
-						<a href="./profile.html" class="cart"><i class="bi bi-person-circle"></i></a>
+						<a href="./index.php" class="active">Home</a>
+						<a href="./about.php">About</a>
+						<a href="./login_form.php">Login</a>
+						
 					</nav>
 				</div>
 			</div>
@@ -92,7 +91,7 @@
 							</p>
 							<div class="text-center">
 								<a
-									href="./accomodation.html"
+									href="./login_form.php"
 									class="btn btn-outline-light btn-lg rounded-pill mt-3 border-2"
 								>
 									Browse Accomodation<i class="bi bi-arrow-right ms-2"></i>
@@ -668,7 +667,7 @@
 							<p class="mx-auto" style="max-width: 20rem">
 								Create an account and advertise student accomodation,
 								for a small listing fee per annum 😇 <br />
-								<a class="btn btn-success rounded-pill mt-4" href="./inner-page.html"
+								<a class="btn btn-success rounded-pill mt-4" href="register_form.php"
 									>Get Started</a
 								>
 							</p>
@@ -694,7 +693,7 @@
 								Read more about why this site was created.
 
 								<br />
-								<a class="btn btn-success rounded-pill mt-4" href="./about.html"
+								<a class="btn btn-success rounded-pill mt-4" href="./about.php"
 									>About</a
 								>
 							</p>
@@ -737,14 +736,14 @@
 			<div id="CTA" class="p-4 bg-success text-center text-white">
 				<h2 class="mb-4">You've made it this far 😇</h2>
 				<a
-					href="./accomodation.html"
+					href="./register_form.php"
 					class="btn btn-outline-light border-2 btn-lg d-none d-lg-inline-block rounded-pill"
-					>Browse Accomodation</a
+					>Create Account</a
 				>
 				<a
-					href="./accomodation.html"
+					href="./register_form.php"
 					class="btn btn-outline-light border-2 d-lg-none rounded-pill"
-					>Browse Accomodation</a
+					>Create Account</a
 				>
 			</div>
 		</main>

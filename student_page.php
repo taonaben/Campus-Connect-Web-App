@@ -34,12 +34,26 @@ if(!isset($_SESSION['user_name'])){
 		<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
 
-		<link href="assets/css/style2.css" rel="stylesheet" />
+		<link href="assets/css/styles2.css" rel="stylesheet" />
 
 		<script defer src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script defer src="assets/js/main.js"></script>
 	</head>
     <body>
-        
+
+	<div class="container">
+
+   <div class="content">
+      
+      <h1>welcome <span><?php echo $_SESSION['user_name'] ?></span></h1>
+      <p>You have successfully logged in to Campus Connect😇</p>
+     
+      <a href="accomodation.php" class="btn">Continue</a>
+      <a href="logout.php" class="btn">logout</a>
+   </div>
+
+</div>
+	
+
     </body>
 </html>

@@ -62,6 +62,31 @@ if(isset($_POST['submit'])){
 		<script defer src="assets/js/main.js"></script>
 	</head>
     <body>
+
+    <div class="form-container">
+
+   <form action="" method="post">
+      <h3>register now</h3>
+      <?php
+      if(isset($error)){
+         foreach($error as $error){
+            echo '<span class="error-msg">'.$error.'</span>';
+         };
+      };
+      ?>
+      <input type="text" name="name" required placeholder="enter your name">
+      <input type="email" name="email" required placeholder="enter your email">
+      <input type="password" name="password" required placeholder="enter your password">
+      <input type="password" name="cpassword" required placeholder="confirm your password">
+      <select name="user_type">
+         <option value="user">student</option>
+         <option value="admin">landlord</option>
+      </select>
+      <input type="submit" name="submit" value="register now" class="form-btn">
+      <p>already have an account? <a href="login_form.php">login now</a></p>
+   </form>
+
+</div>
         
     </body>
 </html>

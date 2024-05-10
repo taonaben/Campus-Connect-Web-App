@@ -33,12 +33,26 @@ if(!isset($_SESSION['admin_name'])){
 		<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
 
-		<link href="assets/css/style2.css" rel="stylesheet" />
+		<link href="assets/css/styles2.css" rel="stylesheet" />
 
 		<script defer src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script defer src="assets/js/main.js"></script>
 	</head>
     <body>
+
+	<div class="container">
+
+   <div class="content">
+     
+      <h1>welcome <span><?php echo $_SESSION['admin_name'] ?></span></h1>
+      <p>you have successfully logged in as a Landlord!😇</p>
+     
+      <a href="inner_page.php" class="btn">Continue</a>
+      <a href="logout.php" class="btn">logout</a>
+   </div>
+
+</div>
+
         
     </body>
 </html>

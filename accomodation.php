@@ -66,12 +66,11 @@
 						<i class="bi bi-list fs-5"></i>
 					</button>
 					<nav class="d-none d-lg-flex align-items-center">
-						<a href="./index.html">Home</a>
-						<a href="./accomodation.html" class="active">Accomodation</a>
-						<a href="./about.html">About</a>
+						<!--<a href="./index.php">Home</a> -->
+						<a href="./accomodation.php" class="active">Accomodation</a>
+						<a href="./logout.php" >Logout</a>
 						
-						<a href="./signin.html">SignIn</a>
-						<a href="./profile.html" class="cart"><i class="bi bi-person-circle"></i></a>
+						
 					</nav>
 				</div>
 			</div>

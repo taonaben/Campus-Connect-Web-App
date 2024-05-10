@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
    $cpass = md5($_POST['cpassword']);
    $user_type = $_POST['user_type'];
 
-   $select = " SELECT * FROM user_form WHERE email = '$email' && password = '$pass' ";
+   $select = " SELECT * FROM user_form WHERE email = '$email' && password = '$pass' "; 
 
    $result = mysqli_query($conn, $select);
 
@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
       }elseif($row['user_type'] == 'user'){
 
          $_SESSION['user_name'] = $row['name'];
-         header('location:user_page.php');
+         header('location:student_page.php');
 
       }
      
@@ -70,22 +70,27 @@ if(isset($_POST['submit'])){
 		<script defer src="assets/js/main.js"></script>
 	</head>
     <body>
+
     <div class="form-container">
 
-<form action="" method="post">
-   <h3>login now</h3>
-   <?php
-   if(isset($error)){
-      foreach($error as $error){
-         echo '<span class="error-msg">'.$error.'</span>';
+   <form action ="" method ="post">
+      <h3>login now</h3>
+      <?php
+      if(isset($error)){
+         foreach($error as $error){
+            echo '<span class="error-msg">'.$error.'</span>';
+         };
       };
-   };
-   ?>
-   <input type="email" name="email" required placeholder="enter your email">
-   <input type="password" name="password" required placeholder="enter your password">
-   <input type="submit" name="submit" value="login now" class="form-btn">
-   <p>don't have an account? <a href="register_form.php">register now</a></p>
-</form>
-        
+      ?>
+
+      <input type="email" name="email" required placeholder="enter your email">
+      <input type="password" name="password" required placeholder="enter your password">
+      <input type="submit" name="submit" value="login now" class="form-btn">
+      <p>don't have an account? <a href="register_form.php">register now</a></p>
+   </form>
+
+</div>
+
+   
     </body>
 </html>

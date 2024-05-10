@@ -1,5 +1,5 @@
 <?php
 
-$conn = mysqli_connect('localhost','root','','campus connect');
+$conn = mysqli_connect('localhost','root','','cs_db');
 
 ?>

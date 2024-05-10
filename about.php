@@ -34,7 +34,7 @@
 		<h2>In development</h2>
 		<p class="my-2">This page is not ready for viewing.</p>
 		<div>
-			<a href="./index.html" class="btn btn-success rounded-pill px-4"
+			<a href="./index.php" class="btn btn-success rounded-pill px-4"
 				><i class="bi bi-house-door-fill me-2"></i>Home</a
 			>
 		</div>

@@ -42,7 +42,7 @@
 				<a href="./accomodation.html">Browse Accomodation</a>
 				<a href="./about.html">About</a>
 				<a href="./contact.html">Get In Touch</a>
-				<a href="./signin.html">SignIn</a>
+				<a href="./index.php">SignIn</a>
 			</div>
 
 			<a href="#" class="back-to-top d-flex align-items-center justify-content-center"
@@ -70,11 +70,10 @@
 						<i class="bi bi-list fs-5"></i>
 					</button>
 					<nav class="d-none d-lg-flex align-items-center">
-						<a href="./index.html" class="active">Home</a>
-						<a href="./accomodation.html">Accomodation</a>
-						<a href="./about.html">About</a>
-						<a href="./signin.html">SignIn</a>
-						<a href="./profile.html" class="cart"><i class="bi bi-person-circle"></i></a>
+						<a href="./index.php" class="active">Home</a>
+						<a href="./accomodation.php">Browse</a>
+						<a href="./logout.php">Logout</a>
+						
 					</nav>
 				</div>
 			</div>
@@ -309,19 +308,7 @@ Boarding House details, condition, features and any other information.</textarea
 
 
 <!--START OF FOOTER--> 
-			<div id="CTA" class="p-4 bg-success text-center text-white">
-				<h2 class="mb-4">You've made it this far 😇</h2>
-				<a
-					href="./accomodation.html"
-					class="btn btn-outline-light border-2 btn-lg d-none d-lg-inline-block rounded-pill"
-					>Browse Accomodation</a
-				>
-				<a
-					href="./accomodation.html"
-					class="btn btn-outline-light border-2 d-lg-none rounded-pill"
-					>Browse Accomodation</a
-				>
-			</div>
+			
 		</main>
 
 		<footer class="p-4 bg-success text-center text-white">
