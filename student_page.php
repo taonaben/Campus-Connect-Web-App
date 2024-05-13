@@ -46,7 +46,7 @@ if(!isset($_SESSION['user_name'])){
    <div class="content">
       
       <h1>welcome <span><?php echo $_SESSION['user_name'] ?></span></h1>
-      <p>You have successfully logged in to Campus Connect😇</p>
+      <p>You have successfully logged in to Campus Connect</p>
      
       <a href="accomodation.php" class="btn">Continue</a>
       <a href="logout.php" class="btn">logout</a>
