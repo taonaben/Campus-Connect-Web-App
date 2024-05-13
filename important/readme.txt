@@ -1,0 +1,1 @@
+open "C:\xampp\mysql\bin\my.ini" and change max_packet_size to 1G
