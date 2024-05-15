@@ -1,12 +1,35 @@
 <?php
+
+// Define the number of cards per page
+$cardsPerPage = 5;
+
 // Connect to the database (assuming you have a $conn variable already established)
-include 'config.php'; // Include your database connection file
+include 'config.php'; 
 
 // Query to fetch data from the 'properties' table
 $sql = "SELECT * FROM properties";
 $result = mysqli_query($conn, $sql);
 
-?>
+// Query to fetch data from the 'properties' table
+$sql = "SELECT COUNT(*) AS total FROM properties"; // Count total number of properties
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$totalProperties = $row['total']; // Total number of properties
+
+// Calculate the total number of pages
+$totalPages = ceil($totalProperties / $cardsPerPage);
+
+// Retrieve the current page number from the URL parameter
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Calculate the offset for pagination
+$offset = ($current_page - 1) * $cardsPerPage;
+
+// Query to fetch data from the 'properties' table with pagination
+$sql = "SELECT * FROM properties LIMIT $offset, $cardsPerPage";
+$result = mysqli_query($conn, $sql); ?>
+
+
 
 
 
@@ -49,10 +72,10 @@ $result = mysqli_query($conn, $sql);
 			<button id="close-nav" class="btn">
 				<i class="bi bi-x fs-1 m-2"></i>
 			</button>
-			<a href="./index.html">Home</a>
-			<a href="./accomodation.html" class="text-decoration-underline">Browse Accomodation</a>
-			<a href="./about.html">About</a>
-			<a href="./contact.html">Get In Touch</a>
+			<a href="./index.php">Home</a>
+			<a href="./accomodation.php" class="text-decoration-underline">Browse Accomodation</a>
+			<a href="./about.php">About</a>
+			<a href="./contact.php">Get In Touch</a>
 		</div>
 
 		<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -61,7 +84,7 @@ $result = mysqli_query($conn, $sql);
 	<header class="sticky-top d-flex text-white bg-success">
 		<div class="container">
 			<div class="p-3 d-flex justify-content-between align-items-center">
-				<a href="./index.html" id="logo" class="text-inherit mt-2">
+				<a href="./index.php" id="logo" class="text-inherit mt-2">
 					<h4 class="">
 						<i class="bi bi-house-door-fill"></i>
 						<span>C</span>ampus<span>-C</span>onnect
@@ -184,7 +207,7 @@ $result = mysqli_query($conn, $sql);
 
 					</div>
 
-					<a href="./contact.html" class="text-success text-decoration-underline text-center w-100 d-block">Suggest filters</a>
+					<a href="./contact.php" class="text-success text-decoration-underline text-center w-100 d-block">Suggest filters</a>
 				</div>
 			</div>
 
@@ -348,7 +371,7 @@ $result = mysqli_query($conn, $sql);
 										</div>
 									</div>
 
-									<a href="./contact.html" class="text-success text-decoration-underline text-center w-100 d-block">Suggest
+									<a href="./contact.php" class="text-success text-decoration-underline text-center w-100 d-block">Suggest
 										filters</a>
 								</div>
 							</div>
@@ -422,7 +445,8 @@ $result = mysqli_query($conn, $sql);
 
 
 													<div class="d-flex align-items-center justify-content-between">
-														<a href="./view.html" class="btn btn-success btn-sm rounded-pill px-3">View</a>
+													<a href="./view_listing.php?house_id=<?php echo $row['house_id']; ?>" class="btn btn-success btn-sm rounded-pill px-3">View</a>
+
 													</div>
 												</div>
 											</div>
@@ -432,8 +456,32 @@ $result = mysqli_query($conn, $sql);
 										<!-- Other property details -->
 									</div>
 									<!-- End Property Listing -->
+
+
+
+
+
+								<?php
+							} ?>
+
+								<!-- Page Selector -->
+								<nav aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+										<li class="page-item <?php echo ($current_page == 1) ? 'disabled' : ''; ?>">
+											<a class="page-link border-0" href="?page=1"><i class="bi bi-chevron-double-left"></i></a>
+										</li>
+										<?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+											<li class="page-item <?php echo ($page == $current_page) ? 'active' : ''; ?>">
+												<a class="page-link bg-light text-success border-0" href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+											</li>
+										<?php endfor; ?>
+										<li class="page-item <?php echo ($current_page == $totalPages) ? 'disabled' : ''; ?>">
+											<a class="page-link border-0" href="?page=<?php echo $totalPages; ?>"><i class="bi bi-chevron-double-right"></i></a>
+										</li>
+									</ul>
+								</nav>
+
 							<?php
-							}
 						} else {
 							// If no rows are returned, display a message
 							echo "No properties found.";
@@ -442,27 +490,6 @@ $result = mysqli_query($conn, $sql);
 						// Close the database connection
 						mysqli_close($conn);
 							?>
-
-							<nav aria-label="Page navigation example">
-								<ul class="pagination justify-content-center">
-									<li class="page-item disabled">
-										<a class="page-link border-0"><i class="bi bi-chevron-double-left"></i></a>
-									</li>
-									<li class="page-item active">
-										<a class="page-link bg-light text-success border-0" href="#">1</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link text-success border-0" href="#">2</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link text-success border-0" href="#">3</a>
-									</li>
-									<li class="page-item disabled">
-										<a class="page-link border-0" href="#"><i class="bi bi-chevron-double-right"></i>
-										</a>
-									</li>
-								</ul>
-							</nav>
 								</div>
 					</div>
 				</div>
