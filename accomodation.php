@@ -4,7 +4,7 @@
 $cardsPerPage = 5;
 
 // Connect to the database (assuming you have a $conn variable already established)
-include 'config.php'; 
+include 'config.php';
 
 // Query to fetch data from the 'properties' table
 $sql = "SELECT * FROM properties";
@@ -27,7 +27,8 @@ $offset = ($current_page - 1) * $cardsPerPage;
 
 // Query to fetch data from the 'properties' table with pagination
 $sql = "SELECT * FROM properties LIMIT $offset, $cardsPerPage";
-$result = mysqli_query($conn, $sql); ?>
+$result = mysqli_query($conn, $sql);
+?>
 
 
 
@@ -111,29 +112,8 @@ $result = mysqli_query($conn, $sql); ?>
 				<div class="c-rounded-2 p-4 bg-white" style="min-height: 75vh">
 					<h2 class="px-3">Filters</h2>
 
-					<div id="chips" class="my-3 pb-2 d-flex overflow-auto gap-2 align-items-center">
-						<div class="chip border text-nowrap bg-light rounded-pill mx-1 small px-2">
-							<i class="bi bi-x-circle me-1"></i> Mzari
-						</div>
 
-						<div class="chip border text-nowrap bg-light rounded-pill mx-1 small px-2">
-							<i class="bi bi-x-circle me-1"></i> 5km
-						</div>
-
-						<div class="chip border text-nowrap bg-light rounded-pill mx-1 small px-2">
-							<i class="bi bi-x-circle me-1"></i> $ 100+
-						</div>
-
-
-
-						<div class="chip border text-nowrap bg-light rounded-pill mx-1 small px-2">
-							<i class="bi bi-x-circle me-1"></i> Boarding House
-						</div>
-
-
-					</div>
-
-					<div class="bg-light c-rounded-1 p-3 mb-3">
+					<!-- <div class="bg-light c-rounded-1 p-3 mb-3">
 						<h5>Location</h5>
 
 						<div class="form-check">
@@ -150,7 +130,7 @@ $result = mysqli_query($conn, $sql); ?>
 							<input class="form-check-input" type="checkbox" />
 							<label class="form-check-label"> Mzari</label>
 						</div>
-					</div>
+					</div> -->
 
 					<div class="bg-light c-rounded-1 p-3 mb-3">
 						<h5>Walking Distance</h5>
@@ -207,178 +187,13 @@ $result = mysqli_query($conn, $sql); ?>
 
 					</div>
 
-					<a href="./contact.php" class="text-success text-decoration-underline text-center w-100 d-block">Suggest filters</a>
+
 				</div>
 			</div>
 
 			<div id="content" class="col">
 				<div class="bg-white shadow-lg c-rounded-2 p-4 p-lg-5">
-					<div id="controls">
-						<div class="d-none d-lg-flex justify-content-between align-items-center">
-							<input id="search-bar" type="search" placeholder="Search..." class="form-control form-control-lg rounded-pill border-2" name="q" />
-
-							<div class="ms-5 d-flex align-items-center">
-								<label class="d-flex align-items-center justify-content-center pe-2">Sort</label>
-								<select class="form-select cursor bg-light w-fit" name="" id="">
-									<option selected>Newest</option>
-									<option value="">Oldest</option>
-									<option value="">Price &DownArrow;</option>
-									<option value="">Price &UpArrow;</option>
-								</select>
-							</div>
-
-							<!-- <div class="ms-5 d-flex rounded-pill border bg-light px-4 py-2">
-									<label
-										class="d-flex align-items-center justify-content-center pe-2"
-										>Sort</label
-									>
-									<select class="form-select cursor border-0 w-fit" name="" id="">
-										<option selected>Newest</option>
-										<option value="">Oldest</option>
-										<option value="">Price &DownArrow;</option>
-										<option value="">Price &UpArrow;</option>
-									</select>
-								</div> -->
-						</div>
-
-						<div class="my-4 d-lg-none">
-							<input id="search-bar" type="search" placeholder="Search..." class="form-control form-control-lg rounded-pill border-2 mb-4" name="q" />
-
-							<div class="mb-4 d-flex align-items-center justify-content-between">
-								<!-- <div class="d-flex c-rounded-1 border bg-light px-3 py-1">
-										<label
-											class="d-flex align-items-center justify-content-center pe-2"
-											>Sort</label
-										>
-										<select
-											class="form-select cursor border-0 w-fit"
-											name=""
-											id=""
-										>
-											<option selected>Newest</option>
-											<option value="">Oldest</option>
-											<option value="">Price &DownArrow;</option>
-											<option value="">Price &UpArrow;</option>
-										</select>
-									</div> -->
-
-								<div class="d-flex align-items-center">
-									<label class="d-flex align-items-center justify-content-center pe-2">Sort</label>
-									<select class="form-select cursor bg-light w-fit" name="" id="">
-										<option selected>Newest</option>
-										<option value="">Oldest</option>
-										<option value="">Price &DownArrow;</option>
-										<option value="">Price &UpArrow;</option>
-									</select>
-								</div>
-
-								<button id="open-filters" class="btn btn-success px-3 rounded-pill">
-									<i class="bi bi-funnel-fill me-2"></i>Filters
-								</button>
-
-								<div id="mobile-filters" class="position-fixed top-0 start-0 w-100 h-100 overflow-auto p-4 bg-white">
-									<div class="px-3 d-flex align-items-center justify-content-between">
-										<h2 class="">Filters</h2>
-										<button id="close-filters" class="btn rounded-circle">
-											<i class="bi bi-x-circle fs-2"></i>
-										</button>
-									</div>
-
-									<div id="chips" class="my-3 pb-2 d-flex overflow-auto gap-2 align-items-center">
-										<div class="chip border text-nowrap bg-light rounded-pill mx-1 small px-2">
-											<i class="bi bi-x-circle me-1"></i> Mzari
-										</div>
-
-										<div class="chip border text-nowrap bg-light rounded-pill mx-1 small px-2">
-											<i class="bi bi-x-circle me-1"></i> 5km
-										</div>
-
-										<div class="chip border text-nowrap bg-light rounded-pill mx-1 small px-2">
-											<i class="bi bi-x-circle me-1"></i> $ 100+
-										</div>
-
-
-										<div class="chip border text-nowrap bg-light rounded-pill mx-1 small px-2">
-											<i class="bi bi-x-circle me-1"></i> Boarding House
-										</div>
-
-
-									</div>
-
-									<div class="bg-light c-rounded-1 p-3 mb-3">
-										<h4>Location</h4>
-
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" checked />
-											<label class="form-check-label"> Coldstream </label>
-										</div>
-
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" />
-											<label class="form-check-label"> Katanda </label>
-										</div>
-
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" />
-											<label class="form-check-label"> Mzari </label>
-										</div>
-									</div>
-
-									<div class="bg-light c-rounded-1 p-3 mb-3">
-										<h4>Walking Distance</h4>
-
-										<div class="d-flex">
-											<input class="walking-distance flex-fill" value="2" max="20" min="0" step="1" type="range" />
-											<label id="walking-distance-label" class="ms-2 text-nowrap">4 km</label>
-										</div>
-									</div>
-
-									<div class="bg-light c-rounded-1 p-3 mb-3">
-										<h4>Rent (monthly)</h4>
-
-										<div class="form-check">
-											<input class="form-check-input" type="radio" name="cost" checked />
-											<label class="form-check-label"> $ 50-80 </label>
-										</div>
-
-										<div class="form-check">
-											<input class="form-check-input" type="radio" name="cost" />
-											<label class="form-check-label"> $ 80-100 </label>
-										</div>
-
-
-
-										<div class="form-check">
-											<input class="form-check-input" type="radio" name="cost" />
-											<label class="form-check-label"> $ 100+ </label>
-										</div>
-									</div>
-
-									<div class="bg-light c-rounded-1 p-3 mb-3">
-										<h4>Type</h4>
-
-
-
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" checked />
-											<label class="form-check-label">
-												Boarding House</label>
-										</div>
-
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" />
-											<label class="form-check-label"> Cottage </label>
-										</div>
-									</div>
-
-									<a href="./contact.php" class="text-success text-decoration-underline text-center w-100 d-block">Suggest
-										filters</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
+					
 					<div id="Listings" class="my-5">
 						<h3 class="text-center mb-4">All Accomodation</h3>
 
@@ -445,7 +260,7 @@ $result = mysqli_query($conn, $sql); ?>
 
 
 													<div class="d-flex align-items-center justify-content-between">
-													<a href="./view_listing.php?house_id=<?php echo $row['house_id']; ?>" class="btn btn-success btn-sm rounded-pill px-3">View</a>
+														<a href="./view_listing.php?house_id=<?php echo $row['house_id']; ?>" class="btn btn-success btn-sm rounded-pill px-3">View</a>
 
 													</div>
 												</div>

@@ -10,9 +10,14 @@ if (isset($_GET['house_id'])) {
     // Debugging: Check the received house_id
     error_log("Received house_id: " . $property_id);
 
-    // Query to fetch the property details from the 'properties' table
-    $sql = "SELECT * FROM properties WHERE house_id = ?";
+
+    // Query to fetch the property and admin details
+    $sql = "SELECT properties.*, user_form.phone_number 
+    FROM properties 
+    JOIN user_form ON properties.admin_id = user_form.id 
+    WHERE properties.house_id = ?";
     $stmt = $conn->prepare($sql);
+
 
     // Check if the statement was prepared correctly
     if ($stmt === false) {
@@ -42,6 +47,8 @@ if (isset($_GET['house_id'])) {
     exit;
 }
 
+
+
 // Close the database connection
 $conn->close();
 ?>
@@ -67,8 +74,8 @@ $conn->close();
                 <i class="bi bi-x fs-1 m-2"></i>
             </button>
             <a href="./index.html">Home</a>
-            <a href="./accomodation.html" class="text-decoration-underline">Browse Accomodation</a>
-            <a href="./about.html">About</a>
+            <a href="./accomodation.php" class="text-decoration-underline">Browse Accomodation</a>
+            <a href="./about.php">About</a>
             <a href="./contact.html">Get In Touch</a>
         </div>
 
@@ -113,26 +120,82 @@ $conn->close();
                             <?php endif; ?>
                         <?php endfor; ?>
                     </div>
+
+                    <div class="bg-light c-rounded-1 p-3 mb-3">
+                        <a href="https://wa.me/<?php echo htmlspecialchars($user_form['phone_number'], ENT_QUOTES, 'UTF-8'); ?>?text=I%20am%20interested%20in%20your%20property%20listed%20on%20Campus-Connect" class="btn btn-success">
+                            <i class="bi bi-whatsapp"></i> Contact via WhatsApp
+                        </a>
+                    </div>
                 </div>
 
                 <div class="col-lg">
-                    <h4><?php echo htmlspecialchars($property['address'], ENT_QUOTES, 'UTF-8'); ?></h4>
-                    <div>
-                        <div class="mb-3">
-                            <i class="bi bi-geo-alt"></i><?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?>
+                    <div class="bg-light c-rounded-1 p-3 mb-3">
+                        <h5>House details</h5>
+                        <div>
+                            <div class="mb-3">
+                                <i class="bi bi-geo-alt"></i><?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?>
+                            </div>
+                            <div class="mb-3"><i class="bi bi-geo"></i> <?php echo htmlspecialchars($property['distance'], ENT_QUOTES, 'UTF-8'); ?> km to CUT</div>
                         </div>
-                        <div class="mb-3"><i class="bi bi-geo"></i> <?php echo htmlspecialchars($property['distance'], ENT_QUOTES, 'UTF-8'); ?> km to CUT</div>
-                    </div>
 
-                    <div>
-                        <div class="mb-3"><i class="bi bi-person"></i> TZ</div>
-                        <div class="">
-                            <i class="bi bi-currency-dollar"></i> $<?php echo htmlspecialchars($property['price'], ENT_QUOTES, 'UTF-8'); ?>/month
+                        <div>
+                            <div class="mt-4">
+
+                                <div class="">
+                                    <i class="bi bi-currency-dollar"></i> <?php echo htmlspecialchars($property['price'], ENT_QUOTES, 'UTF-8'); ?>/month
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="mt-4">
+                            <div class="bg-light c-rounded-1 p-3 mb-3">
+                                <h5>Features</h5>
+                                <?php if ($property['water_tank']) : ?>
+                                    <div class="mb-2"><i class="bi bi-droplet"></i> Water Tank</div>
+                                <?php endif; ?>
+                                <?php if ($property['wifi']) : ?>
+                                    <div class="mb-2"><i class="bi bi-wifi"></i> Wi-Fi</div>
+                                <?php endif; ?>
+                                <?php if ($property['solar_backup']) : ?>
+                                    <div class="mb-2"><i class="bi bi-sun"></i> Solar</div>
+                                <?php endif; ?>
+                                <?php if ($property['security']) : ?>
+                                    <div class="mb-2"><i class="bi bi-shield-lock"></i> Security</div>
+                                <?php endif; ?>
+                                <?php if ($property['caretaker']) : ?>
+                                    <div class="mb-2"><i class="bi bi-person-badge"></i> Caretaker</div>
+                                <?php endif; ?>
+
+                            </div>
+
+                            <div class="mt-4">
+                                <div class="bg-light c-rounded-1 p-3 mb-3">
+                                    <h5>Rooms available</h5>
+                                    <?php if ($property['single']) : ?>
+                                        <div class="mb-2"><i class="bi bi-house-door"></i> Single Room</div>
+                                    <?php endif; ?>
+                                    <?php if ($property['double_room']) : ?>
+                                        <div class="mb-2"><i class="bi bi-house"></i> Double Room</div>
+                                    <?php endif; ?>
+                                    <?php if ($property['3_sharing']) : ?>
+                                        <div class="mb-2"><i class="bi bi-people"></i> 3 Sharing</div>
+                                    <?php endif; ?>
+                                    <?php if ($property['other']) : ?>
+                                        <div class="mb-2"><i class="bi bi-plus-circle"></i> Other</div>
+                                    <?php endif; ?>
+
+                                </div>
+
+
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
     </main>
 
     <footer class="p-4 bg-success text-center text-white">
@@ -181,6 +244,7 @@ $conn->close();
                 slidePreviews[slideIndex - 1].className += " active";
             }
         });
+
         function goBack() {
             window.history.back();
         }
