@@ -1,18 +1,24 @@
 <?php
 @include 'config.php';
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+	header("Location: login_form.php");
+	exit;
+}
 
 if (isset($_POST['submit'])) {
-
 	// Check connection
 	if (!$conn) {
 		die("Connection failed: " . mysqli_connect_error());
 	}
 
-	//capture strings
+	// Capture strings
 	$address = mysqli_real_escape_string($conn, $_POST['address']);
 	$price = mysqli_real_escape_string($conn, $_POST['price']);
 	$location = mysqli_real_escape_string($conn, $_POST['location']);
 	$add_info = mysqli_real_escape_string($conn, $_POST['add_info']);
+	$admin_id = $_SESSION['user_id'];  // Get the admin ID from the session
 
 	// Initialize the variable to store the checkbox value
 	$waterTank = isset($_POST['water_tank']) ? 1 : 0;
@@ -46,56 +52,64 @@ if (isset($_POST['submit'])) {
 
 		// SQL query to insert image data and other fields into the database
 		$sql = "INSERT INTO properties (
-			address,
-			price,
-			location,
-			img1,
-			img2,
-			img3,
-			img4,
-			img5,
-			img6,
-			img7,
-			water_tank,
-			wifi,
-			security,
-			caretaker,
-			solar_backup,
-			single,
-			double_room,
-			3_sharing,
-			other,
-			distance,
-			add_info
-		) VALUES (
-			'$address',
-			'$price',
-			'$location',
-			$placeholders,
-			'$waterTank',
-			'$wifi',
-			'$security',
-			'$caretaker',
-			'$solar',
-			'$single',
-			'$double',
-			'$sharing3',
-			'$other',
-			'$walkingDistance',
-			'$add_info'
-		)";
-
+            admin_id,
+            address,
+            price,
+            location,
+            img1,
+            img2,
+            img3,
+            img4,
+            img5,
+            img6,
+            img7,
+            water_tank,
+            wifi,
+            security,
+            caretaker,
+            solar_backup,
+            single,
+            double_room,
+            3_sharing,
+            other,
+            distance,
+            add_info
+        ) VALUES (
+            '$admin_id',
+            '$address',
+            '$price',
+            '$location',
+            $placeholders,
+            '$waterTank',
+            '$wifi',
+            '$security',
+            '$caretaker',
+            '$solar',
+            '$single',
+            '$double',
+            '$sharing3',
+            '$other',
+            '$walkingDistance',
+            '$add_info'
+        )";
 
 		// Prepare and bind parameters for image data
 		$stmt = $conn->prepare($sql);
-		$stmt->bind_param(str_repeat('s', count($imageData)), ...$imageData);
+		if ($stmt) {
+			$stmt->bind_param(str_repeat('s', count($imageData)), ...$imageData);
 
-		// Execute the query
-		if ($stmt->execute()) {
-			echo "Images uploaded successfully.";
-			header('location:index.php');
+			// Execute the query
+			if ($stmt->execute()) {
+				echo "Property added successfully.";
+				header('Location: index.php');
+				exit;
+			} else {
+				echo "Error uploading property: " . $stmt->error;
+			}
+
+			$stmt->close();
 		} else {
-			echo "Error uploading images: " . mysqli_error($conn);
+			echo "Error preparing statement: " . $conn->error;
 		}
 	} catch (Exception $e) {
 		echo "Error uploading images: " . $e->getMessage();
@@ -107,7 +121,6 @@ if (isset($_POST['submit'])) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -116,14 +129,6 @@ if (isset($_POST['submit'])) {
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
 	<title>Campus-Connect</title>
-
-	<!-- <link
-			href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-			rel="stylesheet"
-		/> -->
-
-
-
 
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -153,8 +158,7 @@ if (isset($_POST['submit'])) {
 			<a href="./index.php">SignIn</a>
 		</div>
 
-		<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-				class="bi bi-arrow-up-short"></i></a>
+		<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 	</div>
 
 	<!--START OF HEADER -->
@@ -183,15 +187,10 @@ if (isset($_POST['submit'])) {
 	</header>
 	<!--END OF HEADER -->
 
-
-
-
-
-	<main class="my-4 px-4" method="post">
+	<main class="my-4 px-4" method="POST">
 		<h1 class="text-center mb-3">Post your Boarding House.</h1>
 
-		<form class="container" method="post" enctype="multipart/form-data"
-			action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+		<form class="container" method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
 			<div class="row">
 				<div class="col-lg-6">
@@ -201,8 +200,7 @@ if (isset($_POST['submit'])) {
 					</p>
 
 					<div class="form-floating mb-3">
-						<input name="address" type="text" id="housename" class="form-control"
-							placeholder="Name of house" />
+						<input name="address" type="text" id="housename" class="form-control" placeholder="Name of house" />
 						<label for="vehiclename">Address</label>
 					</div>
 
@@ -285,57 +283,41 @@ if (isset($_POST['submit'])) {
 					<div class="container-fluid p-0">
 						<div class="row justify-content-around images-container m-0 p-0">
 							<div class="col-12 border h-120-px position-relative bg-dark mb-1">
-								<i onclick="clickNext(this)"
-									class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image1" class="d-none"
-									accept="image/jpeg, image/png, image/gif" />
+								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
+								<input type="file" name="image1" class="d-none" accept="image/jpeg, image/png, image/gif" />
 							</div>
 
 							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
-								<i onclick="clickNext(this)"
-									class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image2" class="d-none"
-									accept="image/jpeg, image/png, image/gif" />
+								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
+								<input type="file" name="image2" class="d-none" accept="image/jpeg, image/png, image/gif" />
 							</div>
 
 							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
-								<i onclick="clickNext(this)"
-									class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image3" class="d-none"
-									accept="image/jpeg, image/png, image/gif" />
+								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
+								<input type="file" name="image3" class="d-none" accept="image/jpeg, image/png, image/gif" />
 							</div>
 
 							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
-								<i onclick="clickNext(this)"
-									class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image4" class="d-none"
-									accept="image/jpeg, image/png, image/gif" />
+								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
+								<input type="file" name="image4" class="d-none" accept="image/jpeg, image/png, image/gif" />
 							</div>
 
 							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
-								<i onclick="clickNext(this)"
-									class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image5" class="d-none"
-									accept="image/jpeg, image/png, image/gif" />
+								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
+								<input type="file" name="image5" class="d-none" accept="image/jpeg, image/png, image/gif" />
 							</div>
 
 							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
-								<i onclick="clickNext(this)"
-									class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image6" class="d-none"
-									accept="image/jpeg, image/png, image/gif" />
+								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
+								<input type="file" name="image6" class="d-none" accept="image/jpeg, image/png, image/gif" />
 							</div>
 
 							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
-								<i onclick="clickNext(this)"
-									class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image7" class="d-none"
-									accept="image/jpeg, image/png, image/gif" />
+								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
+								<input type="file" name="image7" class="d-none" accept="image/jpeg, image/png, image/gif" />
 							</div>
 						</div>
 					</div>
-
-
 
 					<div class="mb-3">
 						<label for="descriptionText" class="form-label d-block p-2">Additional Information</label>
@@ -347,18 +329,14 @@ Boarding House details, condition, rules and any other information."></textarea>
 						<h5>Walking Distance</h5>
 
 						<div class="d-flex">
-							<input class="walking-distance" value="2" max="20" min="0" step="1" type="range"
-								name="distance" />
+							<input class="walking-distance" value="2" max="20" min="0" step="1" type="range" name="distance" />
 							<label id="walking-distance-label" class="ms-2 text-nowrap">5 km</label>
 						</div>
 					</div>
 
 
 					<div>
-						<button class="btn me-2 my-3 btn-primary" name="submit" type="submit">
-							Submit
-						</button>
-
+						<input type="submit" name="submit" value="submit" class="btn me-2 my-3 btn-primary">
 						<button class="btn btn-danger" type="reset">
 							Reset
 						</button>
@@ -366,30 +344,10 @@ Boarding House details, condition, rules and any other information."></textarea>
 				</div>
 			</div>
 		</form>
+
+
 	</main>
 
-
-
-
-	<!-- 
-			THIS 
-			IS
-			THE
-			BODY                                               WRITE YOUR CODE HERE!
-			OF 
-			THE
-			WEBSITE 
-		-->
-
-
-
-
-
-
-
-
-
-	<!--START OF FOOTER-->
 
 	</main>
 
@@ -398,9 +356,6 @@ Boarding House details, condition, rules and any other information."></textarea>
 	</footer>
 
 	<!--END OF FOOTER-->
-
-
-
 
 	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/js/custom.js"></script>

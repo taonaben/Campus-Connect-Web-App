@@ -1,35 +1,44 @@
 <?php
 
-@include 'config.php';
+include 'config.php';
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $phone_number = $_POST['phone_number'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['cpassword'];
+    $user_type = $_POST['user_type'];
 
-   $name = mysqli_real_escape_string($conn, $_POST['name']);
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = md5($_POST['password']);
-   $cpass = md5($_POST['cpassword']);
-   $user_type = $_POST['user_type'];
+    // Check if passwords match
+    if ($password != $confirm_password) {
+        $error = 'Passwords do not match!';
+    } else {
+        // Check if user already exists
+        $select_query = "SELECT * FROM user_form WHERE email = '$email'";
+        $result = mysqli_query($conn, $select_query);
+        if (mysqli_num_rows($result) > 0) {
+            $error = 'User already exists!';
+        } else {
+            // Hash the password before storing
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-   $select = " SELECT * FROM user_form WHERE email = '$email' && password = '$pass' ";
-
-   $result = mysqli_query($conn, $select);
-
-   if(mysqli_num_rows($result) > 0){
-
-      $error[] = 'user already exist!';
-
-   }else{
-
-      if($pass != $cpass){
-         $error[] = 'password not matched!';
-      }else{
-         $insert = "INSERT INTO user_form(name, email, password, user_type) VALUES('$name','$email','$pass','$user_type')";
-         mysqli_query($conn, $insert);
-         header('location:login_form.php');
-      }
-   }
-
-};
+            // Insert user into database
+            $insert_query = "INSERT INTO user_form (name, email, phone_number, password, user_type) VALUES ('$name', '$email', '$phone_number', '$hashed_password', '$user_type')";
+            if (mysqli_query($conn, $insert_query)) {
+                // Registration successful, redirect based on user_type
+                if ($user_type == 'admin') {
+                    header('location:admin_page.php');
+                } elseif ($user_type == 'user') {
+                    header('location:student_page.php');
+                }
+                exit; // Make sure to exit after redirection
+            } else {
+                $error = 'Error: ' . mysqli_error($conn);
+            }
+        }
+    }
+}
 ?>
 
 
@@ -67,15 +76,10 @@ if(isset($_POST['submit'])){
 
    <form action="" method="post">
       <h3>register now</h3>
-      <?php
-      if(isset($error)){
-         foreach($error as $error){
-            echo '<span class="error-msg">'.$error.'</span>';
-         };
-      };
-      ?>
+    
       <input type="text" name="name" required placeholder="enter your name">
       <input type="email" name="email" required placeholder="enter your email">
+      <input type="phone number" name="phone_number" required placeholder="enter your phone number(+263)">
       <input type="password" name="password" required placeholder="enter your password">
       <input type="password" name="cpassword" required placeholder="confirm your password">
       <select name="user_type">

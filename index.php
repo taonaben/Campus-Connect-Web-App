@@ -667,7 +667,7 @@
 							<p class="mx-auto" style="max-width: 20rem">
 								Create an account and advertise student accomodation,
 								for a small listing fee per annum 😇 <br />
-								<a class="btn btn-success rounded-pill mt-4" href="register_form.php"
+								<a class="btn btn-success rounded-pill mt-4" href="inner_page.php"
 									>Get Started</a
 								>
 							</p>

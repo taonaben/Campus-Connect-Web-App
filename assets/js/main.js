@@ -72,7 +72,7 @@
     onscroll(document, toggleBacktotop);
   }
 
-  /* Scrool with ofset on links with a class name .scrollto */
+  /* Scroll with offset on links with a class name .scrollto */
   on(
     "click",
     ".scrollto",
@@ -93,7 +93,7 @@
     true
   );
 
-  /* Scroll with ofset on page load with hash links in the url */
+  /* Scroll with offset on page load with hash links in the url */
   window.addEventListener("load", () => {
     if (window.location.hash) {
       if (select(window.location.hash)) {
@@ -158,7 +158,10 @@
     document.querySelector('input[name="distance"]').value = walkingDistance;
 
     // After setting the value, you can submit the form
-    this.submit();
+    // Note: It's important to ensure this.submit() is called outside any asynchronous code or callbacks
+    setTimeout(() => {
+      this.submit();
+    }, 100); // Delay to ensure the value is set
   });
 
   // Update label text based on slider value
@@ -186,5 +189,3 @@
     });
   }
 })();
-
-
