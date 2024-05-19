@@ -150,13 +150,13 @@ $result = mysqli_query($conn, $sql);
 					<div class="c-rounded-2 p-4 bg-white" style="min-height: 75vh">
 						<h2 class="px-3">Preferences</h2>
 
-						<div class="bg-light c-rounded-1 p-3 mb-3">
+						<!-- <div class="bg-light c-rounded-1 p-3 mb-3">
 							<h5>Walking Distance</h5>
 							<div class="d-flex">
 								<input class="walking-distance" name="distance" value="2" max="20" min="0" step="1" type="range" />
 								<label id="walking-distance-label" class="ms-2 text-nowrap">5 km</label>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="bg-light c-rounded-1 p-3 mb-3">
 							<h5>Rent (monthly)</h5>

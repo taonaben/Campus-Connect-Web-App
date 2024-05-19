@@ -19,6 +19,7 @@ if (isset($_GET['house_id'])) {
     $stmt = $conn->prepare($sql);
 
 
+
     // Check if the statement was prepared correctly
     if ($stmt === false) {
         error_log("MySQL Prepare Error: " . $conn->error);
@@ -37,6 +38,17 @@ if (isset($_GET['house_id'])) {
         // Property not found
         echo "Property not found.";
         exit;
+    }
+
+    // check for number
+    if ($result->num_rows > 0) {
+        // Fetch associative array
+        $row = $result->fetch_assoc();
+        $phone_number = $row['phone_number']; // Retrieve the phone number from the result
+        // Other property details can also be accessed via $row
+    } else {
+        // Handle case where no results are found
+        echo "No property found with the given house_id.";
     }
 
     // Close the statement
@@ -122,9 +134,13 @@ $conn->close();
                     </div>
 
                     <div class="bg-light c-rounded-1 p-3 mb-3">
-                        <a href="https://wa.me/<?php echo htmlspecialchars($user_form['phone_number'], ENT_QUOTES, 'UTF-8'); ?>?text=I%20am%20interested%20in%20your%20property%20listed%20on%20Campus-Connect" class="btn btn-success">
+                        <?php if($phone_number):?>
+                        <a href="https://wa.me/+263<?php echo htmlspecialchars($phone_number['phone_number'], ENT_QUOTES, 'UTF-8'); ?>?text=I%20am%20interested%20in%20your%20property%20listed%20on%20Campus-Connect" class="btn btn-success">
                             <i class="bi bi-whatsapp"></i> Contact via WhatsApp
                         </a>
+                        <?php else: ?>
+                            <p>No phone number available</p>
+                        <?php endif; ?>    
                     </div>
                 </div>
 
@@ -202,6 +218,7 @@ $conn->close();
         <small>&copy; All Rights Reserved. Campus-Connect</small>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script defer src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script defer src="assets/js/main.js"></script>
     <script>

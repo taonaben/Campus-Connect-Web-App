@@ -45,6 +45,9 @@ if (isset($_POST['submit'])) {
 				// Get image data and add it to the array
 				$imageData[] = mysqli_real_escape_string($conn, file_get_contents($_FILES["image$i"]['tmp_name']));
 			}
+			else{
+				$imageData[] = null;
+			}
 		}
 
 		// Prepare placeholders for SQL query
