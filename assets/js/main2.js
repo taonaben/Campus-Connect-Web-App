@@ -14,7 +14,21 @@
 	};
 
 	/**
-	 * Scroll with ofset on page load with hash links in the url
+	 * Smooth scroll to an element with header offset
+	 */
+	const scrollto = (el) => {
+		let header = select("#header");
+		let offset = header ? header.offsetHeight : 0;
+
+		let elementPos = select(el).offsetTop;
+		window.scrollTo({
+			top: elementPos - offset,
+			behavior: "smooth",
+		});
+	};
+
+	/**
+	 * Scroll with offset on page load with hash links in the URL
 	 */
 	window.addEventListener("load", () => {
 		if (window.location.hash) {

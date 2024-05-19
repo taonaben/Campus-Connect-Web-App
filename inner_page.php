@@ -191,7 +191,6 @@ if (isset($_POST['submit'])) {
 		<h1 class="text-center mb-3">Post your Boarding House.</h1>
 
 		<form class="container" method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-
 			<div class="row">
 				<div class="col-lg-6">
 					<p class="text-success my-4">
@@ -201,7 +200,7 @@ if (isset($_POST['submit'])) {
 
 					<div class="form-floating mb-3">
 						<input name="address" type="text" id="housename" class="form-control" placeholder="Name of house" />
-						<label for="vehiclename">Address</label>
+						<label for="housename">Address</label>
 					</div>
 
 					<div class="form-floating mb-3">
@@ -240,6 +239,7 @@ if (isset($_POST['submit'])) {
 						</div>
 
 					</div>
+
 
 
 					<div class="bg-light c-rounded-1 p-3 mb-3">
@@ -320,7 +320,7 @@ if (isset($_POST['submit'])) {
 					</div>
 
 					<div class="mb-3">
-						<label for="descriptionText" class="form-label d-block p-2">Additional Information</label>
+						<label for="otherdetails" class="form-label d-block p-2">Additional Information</label>
 						<textarea class="form-control" name="add_info" id="otherdetails" rows="4" placeholder="
 Boarding House details, condition, rules and any other information."></textarea>
 					</div>
@@ -332,10 +332,12 @@ Boarding House details, condition, rules and any other information."></textarea>
 							<input class="walking-distance" value="2" max="20" min="0" step="1" type="range" name="distance" />
 							<label id="walking-distance-label" class="ms-2 text-nowrap">5 km</label>
 						</div>
+						<input type="hidden" name="distance"/>
 					</div>
 
 
 					<div>
+
 						<input type="submit" name="submit" value="submit" class="btn me-2 my-3 btn-primary">
 						<button class="btn btn-danger" type="reset">
 							Reset

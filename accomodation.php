@@ -1,17 +1,62 @@
 <?php
-
 // Define the number of cards per page
 $cardsPerPage = 5;
 
 // Connect to the database (assuming you have a $conn variable already established)
 include 'config.php';
 
-// Query to fetch data from the 'properties' table
-$sql = "SELECT * FROM properties";
-$result = mysqli_query($conn, $sql);
+// Retrieve user inputs from the form
+// $distance = isset($_GET['distance']) ? intval($_GET['distance']) : 20;
+$cost = isset($_GET['cost']) ? $_GET['cost'] : '';
+$room_types = isset($_GET['room_type']) ? $_GET['room_type'] : [];
+$features = isset($_GET['features']) ? $_GET['features'] : [];  // Filter for features
 
-// Query to fetch data from the 'properties' table
-$sql = "SELECT COUNT(*) AS total FROM properties"; // Count total number of properties
+// Construct the SQL query with filters
+$sql_filters = [];
+
+// Filter for cost
+if (!empty($cost)) {
+	if ($cost === '100+') {
+		$sql_filters[] = "price > 100";
+	} else {
+		list($min, $max) = explode('-', $cost);
+		$sql_filters[] = "price BETWEEN $min AND $max";
+	}
+}
+
+// Filter for distance
+// if (!empty($distance)) {
+// 	$sql_filters[] = "distance <= $distance";
+// }
+
+// Filter for room types
+if (!empty($room_types)) {
+	$room_type_conditions = [];
+	foreach ($room_types as $room_type) {
+		$room_type_conditions[] = "$room_type = 1";
+	}
+	if (!empty($room_type_conditions)) {
+		$sql_filters[] = '(' . implode(' OR ', $room_type_conditions) . ')';
+	}
+}
+
+// filter for features
+if (!empty($features)) {
+	$feature_conditions = [];
+	foreach ($features as $feature) {
+		// Assuming the feature names are stored in columns with the same name in the database
+		$feature_conditions[] = "$feature = 1";
+	}
+	if (!empty($feature_conditions)) {
+		$sql_filters[] = '(' . implode(' OR ', $feature_conditions) . ')';
+	}
+}
+
+
+$filter_query = !empty($sql_filters) ? "WHERE " . implode(" AND ", $sql_filters) : "";
+
+// Query to count total number of properties
+$sql = "SELECT COUNT(*) AS total FROM properties $filter_query";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $totalProperties = $row['total']; // Total number of properties
@@ -25,18 +70,10 @@ $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 // Calculate the offset for pagination
 $offset = ($current_page - 1) * $cardsPerPage;
 
-// Query to fetch data from the 'properties' table with pagination
-$sql = "SELECT * FROM properties LIMIT $offset, $cardsPerPage";
+// Query to fetch data from the 'properties' table with pagination and filters
+$sql = "SELECT * FROM properties $filter_query LIMIT $offset, $cardsPerPage";
 $result = mysqli_query($conn, $sql);
 ?>
-
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,91 +146,91 @@ $result = mysqli_query($conn, $sql);
 	<main class="container py-4 px-2">
 		<div class="row">
 			<div id="sidebar" class="col-3 d-none d-lg-block">
-				<div class="c-rounded-2 p-4 bg-white" style="min-height: 75vh">
-					<h2 class="px-3">Filters</h2>
+				<form method="GET" action="accomodation.php">
+					<div class="c-rounded-2 p-4 bg-white" style="min-height: 75vh">
+						<h2 class="px-3">Preferences</h2>
 
-
-					<!-- <div class="bg-light c-rounded-1 p-3 mb-3">
-						<h5>Location</h5>
-
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" checked />
-							<label class="form-check-label">Coldstream</label>
+						<div class="bg-light c-rounded-1 p-3 mb-3">
+							<h5>Walking Distance</h5>
+							<div class="d-flex">
+								<input class="walking-distance" name="distance" value="2" max="20" min="0" step="1" type="range" />
+								<label id="walking-distance-label" class="ms-2 text-nowrap">5 km</label>
+							</div>
 						</div>
 
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" />
-							<label class="form-check-label"> Katanda</label>
+						<div class="bg-light c-rounded-1 p-3 mb-3">
+							<h5>Rent (monthly)</h5>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="cost" value="50-80"/>
+								<label class="form-check-label"> $ 0-50 </label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="cost" value="80-100" />
+								<label class="form-check-label"> $ 50-100 </label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="cost" value="100+" />
+								<label class="form-check-label"> $ 100+ </label>
+							</div>
 						</div>
 
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" />
-							<label class="form-check-label"> Mzari</label>
+						<div class="bg-light c-rounded-1 p-3 mb-3">
+							<h5>Room type</h5>
+							<div class="form-check">
+								<input class="form-check-input" name="room_type[]" type="checkbox" value="single" />
+								<label class="form-check-label">Singles</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" name="room_type[]" type="checkbox" value="double" />
+								<label class="form-check-label">Doubles</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" name="room_type[]" type="checkbox" value="3_sharing" />
+								<label class="form-check-label">3 Sharings</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" name="room_type[]" type="checkbox" value="other" />
+								<label class="form-check-label">Other</label>
+							</div>
 						</div>
-					</div> -->
+						<div class="bg-light c-rounded-1 p-3 mb-3">
+							<h5>Features</h5>
 
-					<div class="bg-light c-rounded-1 p-3 mb-3">
-						<h5>Walking Distance</h5>
+							<div class="form-check">
+								<input class="form-check-input" name="features[]" type="checkbox" value="water_tank" />
+								<label class="form-check-label">water_tank</label>
+							</div>
 
-						<div class="d-flex">
-							<input class="walking-distance" value="2" max="20" min="0" step="1" type="range" />
-							<label id="walking-distance-label" class="ms-2 text-nowrap">5 km</label>
+							<div class="form-check">
+								<input class="form-check-input" name="features[]" type="checkbox" value="wifi" />
+								<label class="form-check-label">Wi-Fi</label>
+							</div>
+
+							<div class="form-check">
+								<input class="form-check-input" name="features[]" type="checkbox" value="solar_backup" />
+								<label class="form-check-label">Solar Backup</label>
+							</div>
+
+							<div class="form-check">
+								<input class="form-check-input" name="features[]" type="checkbox" value="security" />
+								<label class="form-check-label">Security</label>
+							</div>
+
+							<div class="form-check">
+								<input class="form-check-input" name="features[]" type="checkbox" value="caretaker" />
+								<label class="form-check-label">Caretaker</label>
+							</div>
 						</div>
+
+
+						<button type="submit" class="btn btn-success">Apply Filters</button>
 					</div>
-
-					<div class="bg-light c-rounded-1 p-3 mb-3">
-						<h5>Rent (monthly)</h5>
-
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="cost" checked />
-							<label class="form-check-label"> $ 50-80 </label>
-						</div>
-
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="cost" />
-							<label class="form-check-label"> $ 80-100 </label>
-						</div>
-
-
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="cost" />
-							<label class="form-check-label"> $ 100+ </label>
-						</div>
-					</div>
-
-					<div class="bg-light c-rounded-1 p-3 mb-3">
-						<h5>Room type</h5>
-
-						<div class="form-check">
-							<input class="form-check-input" name="single" type="checkbox" />
-							<label class="form-check-label">Singles</label>
-						</div>
-
-						<div class="form-check">
-							<input class="form-check-input" name="double" type="checkbox" />
-							<label class="form-check-label">Doubles</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" name="3_sharing" type="checkbox" />
-							<label class="form-check-label">3 Sharings</label>
-						</div>
-						<div class="form-check">
-							<input class="form-check-input" name="other" type="checkbox" />
-							<label class="form-check-label">Other</label>
-						</div>
-
-
-
-
-					</div>
-
-
-				</div>
+				</form>
 			</div>
 
 			<div id="content" class="col">
 				<div class="bg-white shadow-lg c-rounded-2 p-4 p-lg-5">
-					
+
 					<div id="Listings" class="my-5">
 						<h3 class="text-center mb-4">All Accomodation</h3>
 
