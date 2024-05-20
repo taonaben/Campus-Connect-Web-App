@@ -62,6 +62,7 @@
 					<a href="./index.php" class="active">Home</a>
 					<a href="./about.php">About</a>
 					<a href="./login_form.php">Login</a>
+					<a href="./logout.php">Logout</a>
 
 				</nav>
 			</div>
