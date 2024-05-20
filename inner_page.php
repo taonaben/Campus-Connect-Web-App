@@ -4,7 +4,6 @@ session_start();
 
 if (!isset($_SESSION['user_id'])) {
 	header("Location: login_form.php");
-	exit;
 }
 
 if (isset($_POST['submit'])) {
@@ -154,10 +153,10 @@ if (isset($_POST['submit'])) {
 			<button id="close-nav" class="btn">
 				<i class="bi bi-x fs-1 m-2"></i>
 			</button>
-			<a href="./index.html" class="text-decoration-underline">Home</a>
-			<a href="./accomodation.html">Browse Accomodation</a>
-			<a href="./about.html">About</a>
-			<a href="./contact.html">Get In Touch</a>
+			<a href="./index.php" class="text-decoration-underline">Home</a>
+			<a href="./accomodation.php">Browse Accomodation</a>
+			<a href="./about.php">About</a>
+			<a href="./contact.php">Get In Touch</a>
 			<a href="./index.php">SignIn</a>
 		</div>
 
@@ -169,7 +168,7 @@ if (isset($_POST['submit'])) {
 	<header class="sticky-top d-flex text-white bg-success">
 		<div class="container">
 			<div class="p-3 d-flex justify-content-between align-items-center">
-				<a href="./index.html" id="logo" class="text-inherit mt-2">
+				<a href="./index.php" id="logo" class="text-inherit mt-2">
 					<h4 class="">
 						<i class="bi bi-house-door-fill"></i>
 						<span>C</span>ampus<span>-C</span>onnect

@@ -1,6 +1,7 @@
 <?php
 // Include the database configuration file
 include 'config.php';
+session_start();
 
 // Check if the 'house_id' parameter is set in the URL
 if (isset($_GET['house_id'])) {
@@ -85,10 +86,10 @@ $conn->close();
             <button id="close-nav" class="btn">
                 <i class="bi bi-x fs-1 m-2"></i>
             </button>
-            <a href="./index.html">Home</a>
+            <a href="./index.php">Home</a>
             <a href="./accomodation.php" class="text-decoration-underline">Browse Accomodation</a>
             <a href="./about.php">About</a>
-            <a href="./contact.html">Get In Touch</a>
+            <a href="./contact.php">Get In Touch</a>
         </div>
 
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
