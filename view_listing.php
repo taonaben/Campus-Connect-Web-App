@@ -118,6 +118,13 @@ $conn->close();
                     </div>
 
                     <div class="bg-light c-rounded-1 p-3 mb-3">
+                    <h5>Additional Information</h5>
+                        <p>
+                        <?php echo htmlspecialchars($property['add_info'], ENT_QUOTES, 'UTF-8'); ?>
+                        </p>
+                    </div>
+
+                    <div class="bg-light c-rounded-1 p-3 mb-3">
                         <?php if ($phone_number) : ?>
                             <a href="https://wa.me/<?php echo htmlspecialchars($phone_number, ENT_QUOTES, 'UTF-8'); ?>?text=I%20am%20interested%20in%20your%20property%20listed%20on%20Campus-Connect" class="btn btn-success">
                                 <i class="bi bi-whatsapp"></i> Contact via WhatsApp
@@ -134,6 +141,9 @@ $conn->close();
                         <div>
                             <div class="mb-3">
                                 <i class="bi bi-geo-alt"></i><?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?>
+                            </div>
+                            <div class="mb-3">
+                                <i class="bi bi-gender-ambiguous"></i> <?php echo htmlspecialchars($property['house_type'], ENT_QUOTES, 'UTF-8'); ?>
                             </div>
                             <div class="mb-3"><i class="bi bi-geo"></i> <?php echo htmlspecialchars($property['distance'], ENT_QUOTES, 'UTF-8'); ?> km to CUT</div>
                         </div>
@@ -170,10 +180,10 @@ $conn->close();
                                 <div class="bg-light c-rounded-1 p-3 mb-3">
                                     <h5>Rooms available</h5>
                                     <?php if ($property['single']) : ?>
-                                        <div class="mb-2"><i class="bi bi-house-door"></i> Single Room</div>
+                                        <div class="mb-2"><i class="bi bi-house-door"></i> Single Rooms</div>
                                     <?php endif; ?>
                                     <?php if ($property['double_room']) : ?>
-                                        <div class="mb-2"><i class="bi bi-house"></i> Double Room</div>
+                                        <div class="mb-2"><i class="bi bi-house"></i> Double Rooms</div>
                                     <?php endif; ?>
                                     <?php if ($property['3_sharing']) : ?>
                                         <div class="mb-2"><i class="bi bi-people"></i> 3 Sharing</div>

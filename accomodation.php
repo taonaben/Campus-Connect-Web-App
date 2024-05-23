@@ -278,14 +278,15 @@ $result = mysqli_query($conn, $sql);
 												<div class="d-flex d-lg-block align-items-start align-items-lg-stretch justify-content-between">
 													<div class="mb-lg-3">
 														<!-- make to remove address from cards -->
-														<h4 class="mb-3 text-nowrap w-100 text-ellipsis overflow-hidden">
+														<!-- <h4 class="mb-3 text-nowrap w-100 text-ellipsis overflow-hidden">
 															<?php echo $row['address']; ?>
-														</h4>
+														</h4> -->
+														
 														<div class="mb-3">
 															<i class="bi bi-geo-alt"></i> <?php echo $row['location']; ?>
 														</div>
 														<div class="mb-3">
-															<i class="bi bi-geo"></i> <?php echo $row['distance']; ?> km from Campus
+															<i class="bi bi-gender-ambiguous"></i> <?php echo $row['house_type']; ?>
 														</div>
 														<div>
 															<i class="bi bi-currency-dollar"></i> <?php echo $row['price']; ?>/month
@@ -305,11 +306,6 @@ $result = mysqli_query($conn, $sql);
 										<!-- Other property details -->
 									</div>
 									<!-- End Property Listing -->
-
-
-
-
-
 								<?php
 							} ?>
 
