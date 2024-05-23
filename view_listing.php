@@ -11,15 +11,12 @@ if (isset($_GET['house_id'])) {
     // Debugging: Check the received house_id
     error_log("Received house_id: " . $property_id);
 
-
     // Query to fetch the property and admin details
     $sql = "SELECT properties.*, user_form.phone_number 
-    FROM properties 
-    JOIN user_form ON properties.admin_id = user_form.id 
-    WHERE properties.house_id = ?";
+            FROM properties 
+            JOIN user_form ON properties.admin_id = user_form.id 
+            WHERE properties.house_id = ?";
     $stmt = $conn->prepare($sql);
-
-
 
     // Check if the statement was prepared correctly
     if ($stmt === false) {
@@ -35,21 +32,11 @@ if (isset($_GET['house_id'])) {
     if ($result->num_rows > 0) {
         // Fetch the property details
         $property = $result->fetch_assoc();
+        $phone_number = $property['phone_number']; // Retrieve the phone number from the result
     } else {
         // Property not found
         echo "Property not found.";
         exit;
-    }
-
-    // check for number
-    if ($result->num_rows > 0) {
-        // Fetch associative array
-        $row = $result->fetch_assoc();
-        $phone_number = $row['phone_number']; // Retrieve the phone number from the result
-        // Other property details can also be accessed via $row
-    } else {
-        // Handle case where no results are found
-        echo "No property found with the given house_id.";
     }
 
     // Close the statement
@@ -60,12 +47,9 @@ if (isset($_GET['house_id'])) {
     exit;
 }
 
-
-
 // Close the database connection
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,7 +71,7 @@ $conn->close();
                 <i class="bi bi-x fs-1 m-2"></i>
             </button>
             <a href="./index.php">Home</a>
-            <a href="./accomodation.php" class="text-decoration-underline">Browse Accomodation</a>
+            <a href="./accomodation.php" class="text-decoration-underline">Browse Accommodation</a>
             <a href="./about.php">About</a>
             <a href="./contact.php">Get In Touch</a>
         </div>
@@ -103,7 +87,6 @@ $conn->close();
                     <i class="bi bi-arrow-left me-2"></i> Go Back
                 </button>
             </div>
-
 
             <div class="row">
                 <div class="col-lg">
@@ -135,13 +118,13 @@ $conn->close();
                     </div>
 
                     <div class="bg-light c-rounded-1 p-3 mb-3">
-                        <?php if($phone_number):?>
-                        <a href="https://wa.me/+263<?php echo htmlspecialchars($phone_number['phone_number'], ENT_QUOTES, 'UTF-8'); ?>?text=I%20am%20interested%20in%20your%20property%20listed%20on%20Campus-Connect" class="btn btn-success">
-                            <i class="bi bi-whatsapp"></i> Contact via WhatsApp
-                        </a>
-                        <?php else: ?>
+                        <?php if ($phone_number) : ?>
+                            <a href="https://wa.me/<?php echo htmlspecialchars($phone_number, ENT_QUOTES, 'UTF-8'); ?>?text=I%20am%20interested%20in%20your%20property%20listed%20on%20Campus-Connect" class="btn btn-success">
+                                <i class="bi bi-whatsapp"></i> Contact via WhatsApp
+                            </a>
+                        <?php else : ?>
                             <p>No phone number available</p>
-                        <?php endif; ?>    
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -157,15 +140,11 @@ $conn->close();
 
                         <div>
                             <div class="mt-4">
-
                                 <div class="">
                                     <i class="bi bi-currency-dollar"></i> <?php echo htmlspecialchars($property['price'], ENT_QUOTES, 'UTF-8'); ?>/month
                                 </div>
                             </div>
-
-
                         </div>
-
 
                         <div class="mt-4">
                             <div class="bg-light c-rounded-1 p-3 mb-3">
@@ -185,7 +164,6 @@ $conn->close();
                                 <?php if ($property['caretaker']) : ?>
                                     <div class="mb-2"><i class="bi bi-person-badge"></i> Caretaker</div>
                                 <?php endif; ?>
-
                             </div>
 
                             <div class="mt-4">
@@ -203,13 +181,8 @@ $conn->close();
                                     <?php if ($property['other']) : ?>
                                         <div class="mb-2"><i class="bi bi-plus-circle"></i> Other</div>
                                     <?php endif; ?>
-
                                 </div>
-
-
                             </div>
-
-
                         </div>
                     </div>
                 </div>

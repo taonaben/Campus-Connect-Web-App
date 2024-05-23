@@ -60,6 +60,7 @@
 				</button>
 				<nav class="d-none d-lg-flex align-items-center">
 					<a href="./index.php" class="active">Home</a>
+					<a href="./accomodation.php">Browse Accomodation</a>
 					<a href="./about.php">About</a>
 					<a href="./login_form.php">Login</a>
 

@@ -49,6 +49,8 @@ if (isset($_POST['submit'])) {
 			}
 		}
 
+		
+
 		// Prepare placeholders for SQL query
 		$placeholders = implode(', ', array_fill(0, count($imageData), '?'));
 
