@@ -3,6 +3,10 @@
 include 'config.php';
 session_start();
 
+if (!isset($_SESSION['user_id'])) {
+	header("Location: login_form.php");
+}
+
 // Check if the 'house_id' parameter is set in the URL
 if (isset($_GET['house_id'])) {
     // Get the property ID from the URL
@@ -63,21 +67,9 @@ $conn->close();
 </head>
 
 <body class="bg-success">
-    <div class="invisible-items">
-        <div id="preloader"></div>
-
-        <div id="mobile-nav">
-            <button id="close-nav" class="btn">
-                <i class="bi bi-x fs-1 m-2"></i>
-            </button>
-            <a href="./index.php">Home</a>
-            <a href="./accomodation.php" class="text-decoration-underline">Browse Accommodation</a>
-            <a href="./about.php">About</a>
-            <a href="./contact.php">Get In Touch</a>
-        </div>
-
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-    </div>
+    <!--START OF HEADER -->
+    <?php include './headers/customer_header.php' ?>
+    <!--END OF HEADER -->
 
     <main id="view-slides" class="container py-4 pb-5 px-2">
         <div class="c-rounded-2 p-4 pb-5 p-lg-5 bg-white">
@@ -118,9 +110,9 @@ $conn->close();
                     </div>
 
                     <div class="bg-light c-rounded-1 p-3 mb-3">
-                    <h5>Additional Information</h5>
+                        <h5>Description</h5>
                         <p>
-                        <?php echo htmlspecialchars($property['add_info'], ENT_QUOTES, 'UTF-8'); ?>
+                            <?php echo htmlspecialchars($property['add_info'], ENT_QUOTES, 'UTF-8'); ?>
                         </p>
                     </div>
 
@@ -158,7 +150,7 @@ $conn->close();
 
                         <div class="mt-4">
                             <div class="bg-light c-rounded-1 p-3 mb-3">
-                                <h5>Features</h5>
+                                <h5>Amenities</h5>
                                 <?php if ($property['water_tank']) : ?>
                                     <div class="mb-2"><i class="bi bi-droplet"></i> Water Tank</div>
                                 <?php endif; ?>

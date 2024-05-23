@@ -144,7 +144,7 @@ if (isset($_POST['submit'])) {
 			// Execute the query
 			if ($stmt->execute()) {
 				echo "Property added successfully.";
-				header('Location: index.php');
+				header('Location: admin_dashboard.php');
 				exit;
 			} else {
 				echo "Error uploading property: " . $stmt->error;
@@ -171,7 +171,7 @@ if (isset($_POST['submit'])) {
 	<meta charset="utf-8" />
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-	<title>Campus-Connect</title>
+	<title>Post house</title>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -187,47 +187,9 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-	<div class="invisible-items">
-		<div id="preloader"></div>
-
-		<div id="mobile-nav">
-			<button id="close-nav" class="btn">
-				<i class="bi bi-x fs-1 m-2"></i>
-			</button>
-			<a href="./index.php" class="text-decoration-underline">Home</a>
-			<a href="./accomodation.php">Browse Accomodation</a>
-			<a href="./about.php">About</a>
-			<a href="./contact.php">Get In Touch</a>
-			<a href="./index.php">SignIn</a>
-		</div>
-
-		<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-	</div>
 
 	<!--START OF HEADER -->
-
-	<header class="sticky-top d-flex text-white bg-success">
-		<div class="container">
-			<div class="p-3 d-flex justify-content-between align-items-center">
-				<a href="./index.php" id="logo" class="text-inherit mt-2">
-					<h4 class="">
-						<i class="bi bi-house-door-fill"></i>
-						<span>C</span>ampus<span>-C</span>onnect
-					</h4>
-				</a>
-
-				<button id="open-nav" type="button" class="d-lg-none btn btn-light rounded-circle shadow">
-					<i class="bi bi-list fs-5"></i>
-				</button>
-				<nav class="d-none d-lg-flex align-items-center">
-					<a href="./index.php" class="active">Home</a>
-					<a href="./accomodation.php">Browse</a>
-					<a href="./logout.php">Logout</a>
-
-				</nav>
-			</div>
-		</div>
-	</header>
+	<?php include './headers/landlord_header.php' ?>
 	<!--END OF HEADER -->
 
 	<main class="my-4 px-4" method="POST">
@@ -256,7 +218,14 @@ if (isset($_POST['submit'])) {
 						<label for="price">Price per month In USD</label>
 					</div>
 
-					
+					<div class="mb-3">
+						<label for="house_type" class="form-label">House Type</label>
+						<select name="house_type" id="house_type" class="form-select">
+							<option value="boys">Boys only</option>
+							<option value="girls">Girls only</option>
+							<option value="mixed">Mixed</option>
+						</select>
+					</div>
 
 					<select name="house_type">
 						<option value="boys">Boys only</option>
@@ -375,7 +344,7 @@ Boarding House details, condition, rules and any other information."></textarea>
 					</div>
 
 					<div class="bg-light c-rounded-1 p-3 mb-3">
-						<h5>Walking Distance</h5>
+						<h5>Walking Distance to Campus</h5>
 
 						<div class="d-flex">
 							<input class="walking-distance" value="2" max="20" min="0" step="1" type="range" name="distance" />

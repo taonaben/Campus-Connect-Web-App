@@ -79,7 +79,7 @@ if (isset($_POST['submit'])) {
 
             <input type="text" name="name" required placeholder="enter your name">
             <input type="email" name="email" required placeholder="enter your email">
-            <input type="phone number" name="phone_number" required placeholder="enter your phone number(+263)">
+            <input type="phone number" name="phone_number" required placeholder="enter your phone number 078...">
             <input type="password" name="password" required placeholder="enter your password">
             <input type="password" name="cpassword" required placeholder="confirm your password">
             <select name="user_type">

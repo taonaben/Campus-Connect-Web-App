@@ -98,47 +98,9 @@ $result = mysqli_query($conn, $sql);
 </head>
 
 <body class="bg-success">
-	<div class="invisible-items">
-		<div id="preloader"></div>
-
-		<div id="mobile-nav">
-			<button id="close-nav" class="btn">
-				<i class="bi bi-x fs-1 m-2"></i>
-			</button>
-			<a href="./index.php">Home</a>
-			<a href="./accomodation.php" class="text-decoration-underline">Browse Accomodation</a>
-			<a href="./about.php">About</a>
-			<a href="./contact.php">Get In Touch</a>
-		</div>
-
-		<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-	</div>
-
-	<header class="sticky-top d-flex text-white bg-success">
-		<div class="container">
-			<div class="p-3 d-flex justify-content-between align-items-center">
-				<a href="./index.php" id="logo" class="text-inherit mt-2">
-					<h4 class="">
-						<i class="bi bi-house-door-fill"></i>
-						<span>C</span>ampus<span>-C</span>onnect
-					</h4>
-				</a>
-
-				<button id="open-nav" type="button" class="d-lg-none btn btn-light rounded-circle shadow">
-					<i class="bi bi-list fs-5"></i>
-				</button>
-				<nav class="d-none d-lg-flex align-items-center">
-					<!--<a href="./index.php">Home</a> -->
-					<a href="./accomodation.php" class="active">Accomodation</a>
-					<a href="./about.php">About</a>
-					<a href="./contact.php">Get In Touch</a>
-					<a href="./logout.php">Logout</a>
-
-
-				</nav>
-			</div>
-		</div>
-	</header>
+	<!--START OF HEADER -->
+	<?php include './headers/customer_header.php' ?>
+	<!--END OF HEADER -->
 
 	<main class="container py-4 px-2">
 		<div class="row">
@@ -281,7 +243,7 @@ $result = mysqli_query($conn, $sql);
 														<!-- <h4 class="mb-3 text-nowrap w-100 text-ellipsis overflow-hidden">
 															<?php echo $row['address']; ?>
 														</h4> -->
-														
+
 														<div class="mb-3">
 															<i class="bi bi-geo-alt"></i> <?php echo $row['location']; ?>
 														</div>
