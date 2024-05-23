@@ -136,6 +136,17 @@ if (isset($_POST['submit'])) {
 		// Prepare and bind parameters for image data
 		$stmt = $conn->prepare($sql);
 		if ($stmt) {
+			
+
+			// Execute the query
+			if ($stmt->execute()) {
+				echo "Property added successfully.";
+				header('Location: index.php');
+				exit;
+			} else {
+				echo "Error uploading property: " . $stmt->error;
+			}
+
 			$stmt->close();
 		} else {
 			echo "Error preparing statement: " . $conn->error;
