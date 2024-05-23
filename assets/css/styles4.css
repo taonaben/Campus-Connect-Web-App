@@ -26,8 +26,8 @@ main {
   }
 
   
-  a {
-    color: #000000;
+  a{
+    color: #fff;
     text-decoration: none;
     transition: all 0.5s ease;
   }

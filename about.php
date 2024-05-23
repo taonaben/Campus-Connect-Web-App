@@ -31,7 +31,7 @@
 	<header class="sticky-top d-flex text-white bg-success">
 		<div class="container">
 			<div class="p-3 d-flex justify-content-between align-items-center">
-				<a href="./index.html" id="logo" class="text-inherit mt-2">
+				<a href="./index.php" id="logo" class="text-inherit mt-2">
 					<h4 class="">
 						<i class="bi bi-house-door-fill"></i>
 						<span>C</span>ampus<span>-C</span>onnect
@@ -42,10 +42,10 @@
 					<i class="bi bi-list fs-5"></i>
 				</button>
 				<nav class="d-none d-lg-flex align-items-center">
-					<!--<a href="./index.php">Home</a> -->
-					<a href="./index.php" class="active">Home</a>
+					<a href="./index.php" >Home</a>
+					<a href="./about.php" class="active">About</a>
+					<a href="./login_form.php">Login</a>
 					<a href="./logout.php">Logout</a>
-
 
 				</nav>
 			</div>
@@ -90,13 +90,16 @@
 									finding accommodation off-campus.
 									. Students are often left scrambling to find accommodation and the have fallen
 									victim to scams and struggles to secure reliable accommodation.
+
 								</p>
 								<p class="color-text-a">
+
 									Hence we as the students decided to make this website for our peers to find it
 									easier to get suitable accomodation.
 									By creating “Campus Connect” the aim is to create a gateway between students and
 									landlords to connect and help students to find the best possible accommodation that
 									is suitable to them.
+
 								</p>
 							</div>
 						</div>
