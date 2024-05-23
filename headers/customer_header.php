@@ -14,7 +14,7 @@
 				<nav class="d-none d-lg-flex align-items-center">
 					<a href="./index.php">Home</a>
 					<a href="./accomodation.php">Browse Accomodation</a>
-					<a href="./about.php">About</a>
+					<a href="./location_description.php">Get to know Chinhoyi</a>
 					<a href="./login_form.php">Login</a>
 					<a href="./logout.php">Logout</a>
 
