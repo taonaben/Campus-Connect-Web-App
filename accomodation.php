@@ -17,7 +17,7 @@ $sql_filters = [];
 // Filter for cost
 if (!empty($cost)) {
 	if ($cost === '100+') {
-		$sql_filters[] = "price > 100";
+		$sql_filters[] = "price >= 100";
 	} else {
 		list($min, $max) = explode('-', $cost);
 		$sql_filters[] = "price BETWEEN $min AND $max";
