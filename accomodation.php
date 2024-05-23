@@ -24,11 +24,6 @@ if (!empty($cost)) {
 	}
 }
 
-// Filter for distance
-// if (!empty($distance)) {
-// 	$sql_filters[] = "distance <= $distance";
-// }
-
 // Filter for room types
 if (!empty($room_types)) {
 	$room_type_conditions = [];
@@ -135,6 +130,8 @@ $result = mysqli_query($conn, $sql);
 				<nav class="d-none d-lg-flex align-items-center">
 					<!--<a href="./index.php">Home</a> -->
 					<a href="./accomodation.php" class="active">Accomodation</a>
+					<a href="./about.php">About</a>
+					<a href="./contact.php">Get In Touch</a>
 					<a href="./logout.php">Logout</a>
 
 
@@ -161,7 +158,7 @@ $result = mysqli_query($conn, $sql);
 						<div class="bg-light c-rounded-1 p-3 mb-3">
 							<h5>Rent (monthly)</h5>
 							<div class="form-check">
-								<input class="form-check-input" type="radio" name="cost" value="50-80"/>
+								<input class="form-check-input" type="radio" name="cost" value="50-80" />
 								<label class="form-check-label"> $ 0-50 </label>
 							</div>
 							<div class="form-check">
@@ -181,7 +178,7 @@ $result = mysqli_query($conn, $sql);
 								<label class="form-check-label">Singles</label>
 							</div>
 							<div class="form-check">
-								<input class="form-check-input" name="room_type[]" type="checkbox" value="double" />
+								<input class="form-check-input" name="room_type[]" type="checkbox" value="double_room" />
 								<label class="form-check-label">Doubles</label>
 							</div>
 							<div class="form-check">

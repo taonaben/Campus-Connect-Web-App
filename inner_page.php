@@ -39,6 +39,7 @@ if (isset($_POST['submit'])) {
 		$imageData = [];
 
 
+		
 		if (isset($_FILES["image1"]) && $_FILES["image1"]['error'] === UPLOAD_ERR_OK) {
 			$imageData[] = mysqli_real_escape_string($conn, file_get_contents($_FILES["image1"]['tmp_name']));
 		} else {
@@ -77,6 +78,10 @@ if (isset($_POST['submit'])) {
 		}
 
 
+		
+
+		// Prepare placeholders for SQL query
+		$placeholders = implode(', ', array_fill(0, count($imageData), '?'));
 
 		// SQL query to insert image data and other fields into the database
 		$sql = "INSERT INTO properties (
@@ -131,17 +136,6 @@ if (isset($_POST['submit'])) {
 		// Prepare and bind parameters for image data
 		$stmt = $conn->prepare($sql);
 		if ($stmt) {
-			
-
-			// Execute the query
-			if ($stmt->execute()) {
-				echo "Property added successfully.";
-				header('Location: index.php');
-				exit;
-			} else {
-				echo "Error uploading property: " . $stmt->error;
-			}
-
 			$stmt->close();
 		} else {
 			echo "Error preparing statement: " . $conn->error;
