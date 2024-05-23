@@ -13,8 +13,9 @@
 				</button>
 				<nav class="d-none d-lg-flex align-items-center">
 					<a href="./index.php">Home</a>
-					<a href="./accomodation.php">Browse Accomodation</a>
-					<a href="./location_description.php">Get to know Chinhoyi</a>
+					<a href="./accomodation.php">Browse</a>
+					<a href="./location_description.php">Locations</a>
+					<a href="./contact.php">Contact us</a>
 					<a href="./login_form.php">Login</a>
 					<a href="./logout.php">Logout</a>
 

@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
             if (mysqli_query($conn, $insert_query)) {
                 // Registration successful, redirect based on user_type
                 if ($user_type == 'admin') {
-                    header('location:admin_page.php');// redirect to payment
+                    header('location:inner_page.php');// redirect to payment
                 } elseif ($user_type == 'user') {
                     header('location:student_page.php');
                 }
@@ -82,9 +82,9 @@ if (isset($_POST['submit'])) {
             <input type="phone number" name="phone_number" required placeholder="enter your phone number 078...">
             <input type="password" name="password" required placeholder="enter your password">
             <input type="password" name="cpassword" required placeholder="confirm your password">
-            <select name="user_type">
-                <option value="user">student</option>
-                <option value="admin">landlord</option>
+            <select name="user_type" class="form-select">
+                <option value="user">Student-View houses</option>
+                <option value="admin">Landlord-Post your house</option>
             </select>
             <input type="submit" name="submit" value="register now" class="form-btn">
             <p>already have an account? <a href="login_form.php">login now</a></p>

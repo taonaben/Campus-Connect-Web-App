@@ -64,11 +64,11 @@ if (isset($_POST['submit'])) {
         distance = '$walkingDistance',
         add_info = '$add_info',
         house_type = '$house_type'
-        WHERE id = '$property_id' AND admin_id = '$admin_id'";
+        WHERE house_id = '$property_id' AND admin_id = '$admin_id'";
 
     if ($conn->query($sql) === TRUE) {
         echo "Property updated successfully.";
-        header('Location: list_properties.php');
+        header('Location: admin_dashboard.php');
         exit;
     } else {
         echo "Error updating property: " . $conn->error;
