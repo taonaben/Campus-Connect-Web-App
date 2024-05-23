@@ -39,11 +39,44 @@ if (isset($_POST['submit'])) {
 		$imageData = [];
 
 
+		
 		if (isset($_FILES["image1"]) && $_FILES["image1"]['error'] === UPLOAD_ERR_OK) {
 			$imageData[] = mysqli_real_escape_string($conn, file_get_contents($_FILES["image1"]['tmp_name']));
 		} else {
 			$imageData[] = null;
 		}
+
+		if (isset($_FILES["image2"]) && $_FILES["image2"]['error'] === UPLOAD_ERR_OK) {
+			$imageData[] = mysqli_real_escape_string($conn, file_get_contents($_FILES["image2"]['tmp_name']));
+		} else {
+			$imageData[] = null;
+		}
+		if (isset($_FILES["image3"]) && $_FILES["image3"]['error'] === UPLOAD_ERR_OK) {
+			$imageData[] = mysqli_real_escape_string($conn, file_get_contents($_FILES["image3"]['tmp_name']));
+		} else {
+			$imageData[] = null;
+		}
+		if (isset($_FILES["image4"]) && $_FILES["image4"]['error'] === UPLOAD_ERR_OK) {
+			$imageData[] = mysqli_real_escape_string($conn, file_get_contents($_FILES["image4"]['tmp_name']));
+		} else {
+			$imageData[] = null;
+		}
+		if (isset($_FILES["image5"]) && $_FILES["image5"]['error'] === UPLOAD_ERR_OK) {
+			$imageData[] = mysqli_real_escape_string($conn, file_get_contents($_FILES["image5"]['tmp_name']));
+		} else {
+			$imageData[] = null;
+		}
+		if (isset($_FILES["image6"]) && $_FILES["image6"]['error'] === UPLOAD_ERR_OK) {
+			$imageData[] = mysqli_real_escape_string($conn, file_get_contents($_FILES["image6"]['tmp_name']));
+		} else {
+			$imageData[] = null;
+		}
+		if (isset($_FILES["image7"]) && $_FILES["image7"]['error'] === UPLOAD_ERR_OK) {
+			$imageData[] = mysqli_real_escape_string($conn, file_get_contents($_FILES["image7"]['tmp_name']));
+		} else {
+			$imageData[] = null;
+		}
+
 
 		
 
@@ -103,17 +136,6 @@ if (isset($_POST['submit'])) {
 		// Prepare and bind parameters for image data
 		$stmt = $conn->prepare($sql);
 		if ($stmt) {
-			
-
-			// Execute the query
-			if ($stmt->execute()) {
-				echo "Property added successfully.";
-				header('Location: index.php');
-				exit;
-			} else {
-				echo "Error uploading property: " . $stmt->error;
-			}
-
 			$stmt->close();
 		} else {
 			echo "Error preparing statement: " . $conn->error;
