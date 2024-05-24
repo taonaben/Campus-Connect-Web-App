@@ -20,7 +20,28 @@ if(isset($_POST['submit'])){
 
       $row = mysqli_fetch_array($result);
 
+<<<<<<< Updated upstream
       if($row['user_type'] == 'admin'){
+=======
+            // Redirect based on user_type
+            if ($row['user_type'] == 'admin') {
+                header('Location:admin_dashboard.php');
+                exit;
+            } elseif ($row['user_type'] == 'user') {
+                header('Location:student_page.php');
+                exit;
+            } else {
+                echo "Unknown user type."; // Remove this after testing
+            }
+        } else {
+            // Incorrect password
+            $error = 'Incorrect email or password!';
+        }
+    } else {
+        // Incorrect email
+        $error = 'Incorrect email or password!';
+    }
+>>>>>>> Stashed changes
 
          $_SESSION['admin_name'] = $row['name'];
          header('location:admin_page.php');
