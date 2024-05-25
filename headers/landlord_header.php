@@ -15,7 +15,6 @@
 				<a href="./inner_page.php">Post house</a>
 				<a href="./admin_dashboard.php">My houses</a>
 				<a href="./profile.php">Profile</a>
-				<a href="./logout.php">Logout</a>
 
 			</nav>
 		</div>

@@ -1,10 +1,9 @@
 <?php
+// Start the session
+session_start();
+
 // Define the number of cards per page
 $cardsPerPage = 5;
-
-if (!isset($_SESSION['user_id'])) {
-	header("Location: login_form.php");
-}
 
 // Connect to the database (assuming you have a $conn variable already established)
 include 'config.php';
@@ -196,6 +195,7 @@ $result = mysqli_query($conn, $sql);
 
 					<div id="Listings" class="my-5">
 						<h3 class="text-center mb-4">All Accomodation</h3>
+						
 
 						<?php	// Check if there are any rows returned
 						if (mysqli_num_rows($result) > 0) {

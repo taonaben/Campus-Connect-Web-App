@@ -2,7 +2,7 @@
 @include 'config.php';
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'admin') {
 	header("Location: login_form.php");
 }
 
@@ -184,6 +184,24 @@ if (isset($_POST['submit'])) {
 
 	<script defer src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script defer src="assets/js/main.js"></script>
+	<style>
+		.h-120-px {
+			height: 120px;
+		}
+
+		.h-80-px {
+			height: 80px;
+		}
+
+		.hover-white:hover {
+			color: white;
+		}
+
+		.image-container {
+			background-size: cover;
+			background-position: center;
+		}
+	</style>
 </head>
 
 <body>
@@ -295,39 +313,39 @@ if (isset($_POST['submit'])) {
 
 					<div class="container-fluid p-0">
 						<div class="row justify-content-around images-container m-0 p-0">
-							<div class="col-12 border h-120-px position-relative bg-dark mb-1">
+							<div class="col-12 border h-120-px position-relative bg-dark mb-1 image-container">
 								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image1" class="d-none" accept="image/jpeg, image/png, image/gif" />
+								<input type="file" name="image1" class="d-none" accept="image/jpeg, image/png, image/gif" onchange="previewImage(this)" />
 							</div>
 
-							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
+							<div class="col-4 border h-80-px position-relative bg-dark mb-1 image-container">
 								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image2" class="d-none" accept="image/jpeg, image/png, image/gif" />
+								<input type="file" name="image2" class="d-none" accept="image/jpeg, image/png, image/gif" onchange="previewImage(this)" />
 							</div>
 
-							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
+							<div class="col-4 border h-80-px position-relative bg-dark mb-1 image-container">
 								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image3" class="d-none" accept="image/jpeg, image/png, image/gif" />
+								<input type="file" name="image3" class="d-none" accept="image/jpeg, image/png, image/gif" onchange="previewImage(this)" />
 							</div>
 
-							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
+							<div class="col-4 border h-80-px position-relative bg-dark mb-1 image-container">
 								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image4" class="d-none" accept="image/jpeg, image/png, image/gif" />
+								<input type="file" name="image4" class="d-none" accept="image/jpeg, image/png, image/gif" onchange="previewImage(this)" />
 							</div>
 
-							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
+							<div class="col-4 border h-80-px position-relative bg-dark mb-1 image-container">
 								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image5" class="d-none" accept="image/jpeg, image/png, image/gif" />
+								<input type="file" name="image5" class="d-none" accept="image/jpeg, image/png, image/gif" onchange="previewImage(this)" />
 							</div>
 
-							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
+							<div class="col-4 border h-80-px position-relative bg-dark mb-1 image-container">
 								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image6" class="d-none" accept="image/jpeg, image/png, image/gif" />
+								<input type="file" name="image6" class="d-none" accept="image/jpeg, image/png, image/gif" onchange="previewImage(this)" />
 							</div>
 
-							<div class="col-4 border h-80-px position-relative bg-dark mb-1">
+							<div class="col-4 border h-80-px position-relative bg-dark mb-1 image-container">
 								<i onclick="clickNext(this)" class="bi bi-image position-absolute top-50 start-50 translate-middle fs-1 hover-white"></i>
-								<input type="file" name="image7" class="d-none" accept="image/jpeg, image/png, image/gif" />
+								<input type="file" name="image7" class="d-none" accept="image/jpeg, image/png, image/gif" onchange="previewImage(this)" />
 							</div>
 						</div>
 					</div>
@@ -376,6 +394,23 @@ Boarding House details, condition, rules and any other information."></textarea>
 	<script src="assets/js/custom.js"></script>
 	<script src="assets/js/main2.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script>
+		function clickNext(icon) {
+			icon.nextElementSibling.click();
+		}
+
+		function previewImage(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					var parent = input.parentElement;
+					parent.style.backgroundImage = 'url(' + e.target.result + ')';
+					parent.querySelector('i').style.display = 'none';
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
 
 </body>
 

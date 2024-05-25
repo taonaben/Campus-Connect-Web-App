@@ -1,15 +1,18 @@
 <?php
 session_start();
 
-if (isset($_POST['confirm_payment'])) {
-    $_SESSION['payment_confirmed'] = true;
-
-    // Redirect to registration completion page
-    header('Location: complete_registration.php');
-    exit;
+if ($_SESSION['user_type'] === 'admin') {
+    // Check if the payment is confirmed for admin users
+    if (!isset($_SESSION['payment_confirmed']) || $_SESSION['payment_confirmed'] !== true) {
+        // If payment is not confirmed, redirect to ecocash_payment.php
+        header('Location: ecocash_payment.php');
+        exit;
+    }
 } else {
-    // If accessed directly, redirect to registration page
-    header('Location: register.php');
+    $_SESSION['payment_confirmed'] = true;
+    // For non-admin users, proceed to complete_registration.php
+    header('Location: complete_registration.php');
     exit;
 }
 ?>
+ 

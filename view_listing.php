@@ -3,7 +3,9 @@
 include 'config.php';
 session_start();
 
-
+if (!isset($_SESSION['user_id'])|| $_SESSION['user_type'] !== 'user') {
+	header("Location: login_form.php");
+}
 
 // Check if the 'house_id' parameter is set in the URL
 if (isset($_GET['house_id'])) {

@@ -56,19 +56,38 @@ $result = $conn->query($sql);
             <tbody>
                 <?php while ($row = $result->fetch_assoc()) : ?>
                     <tr>
-                    <td><?php echo htmlspecialchars($row['house_id']); ?></td>
+                        <td><?php echo htmlspecialchars($row['house_id']); ?></td>
                         <td><?php echo htmlspecialchars($row['location']); ?></td>
                         <td><?php echo htmlspecialchars($row['price']); ?></td>
                         <td><?php echo htmlspecialchars($row['house_type']); ?></td>
+
                         <td>
                             <a href="edit_property.php?house_id=<?php echo $row['house_id']; ?>" class="btn btn-primary">Edit</a>
-                            <a class="btn btn-danger">Delete</a>
+                            <button class="btn btn-danger delete-property" data-house-id="<?php echo $row['house_id']; ?>">Delete</button>
                         </td>
+                        ...
+
                     </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-property');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const houseId = this.getAttribute('data-house-id');
+                    const confirmation = confirm("Are you sure you want to delete this property?");
+                    if (confirmation) {
+                        // Redirect to delete_property.php with house_id parameter
+                        window.location.href = `delete_property.php?house_id=${houseId}`;
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 
 </html>

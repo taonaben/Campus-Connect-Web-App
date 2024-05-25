@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
                 header('Location: ./inner_page.php');
                 exit;
             } elseif ($row['user_type'] == 'user') {
-                header('Location: ./student_page.php');
+                header('Location: ./accomodation.php');
                 exit;
             } else {
                 echo "Unknown user type."; // Remove this after testing
