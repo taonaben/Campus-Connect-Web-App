@@ -62,6 +62,7 @@ $result = $conn->query($sql);
                         <td><?php echo htmlspecialchars($row['house_type']); ?></td>
                         <td>
                             <a href="edit_property.php?house_id=<?php echo $row['house_id']; ?>" class="btn btn-primary">Edit</a>
+                            <a class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>

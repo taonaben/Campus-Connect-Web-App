@@ -9,6 +9,7 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $confirm_password = $_POST['cpassword'];
     $user_type = $_POST['user_type'];
+    
 
     // Check if passwords match
     if ($password != $confirm_password) {
@@ -22,6 +23,7 @@ if (isset($_POST['submit'])) {
         } else {
             // Hash the password before storing
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            header('location:ecocash_payment.php');// redirect to payment first
 
             // Insert user into database
             $insert_query = "INSERT INTO user_form (name, email, phone_number, password, user_type) VALUES ('$name', '$email', '$phone_number', '$hashed_password', '$user_type')";
