@@ -1,204 +1,85 @@
-/* Import Font Dancing Script */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
-
-
-* {
+.list-group-item.active {
+  background: #ffc107;
+}
+/* end common class */
+.top-status ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0;
   margin: 0;
-  font-family: "Poppins", sans-serif;
 }
-
-body {
-  background-color: #e8f5ff;
-  
-  overflow: hidden;
+.top-status ul li {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 8px solid #ddd;
+  box-shadow: 1px 1px 10px 1px #ddd inset;
+  margin: 10px 5px;
 }
-
-/* NavbarTop */
-.navbar-top {
-  background-color: #fff;
-  color: #333;
-  box-shadow: 0px 4px 8px 0px grey;
-  height: 70px;
+.top-status ul li.active {
+  border-color: rgb(25 135 84);
+  box-shadow: 1px 1px 20px 1px #ffc107 inset;
 }
+/* end top status */
 
-.title {
-  font-family: "Dancing Script", cursive;
-  padding-top: 15px;
-  position: absolute;
-  left: 45%;
-}
-
-.navbar-top ul {
-  float: right;
+ul.timeline {
   list-style-type: none;
-  margin: 0;
-  overflow: hidden;
-  padding: 18px 50px 0 40px;
-}
-
-.navbar-top ul li {
-  float: left;
-}
-
-.navbar-top ul li a {
-  color: #333;
-  padding: 14px 16px;
-  text-align: center;
-  text-decoration: none;
-}
-
-.icon-count {
-  background-color: #ff0000;
-  color: #fff;
-  float: right;
-  font-size: 11px;
-  left: -25px;
-  padding: 2px;
   position: relative;
 }
-
-/* End */
-
-/* Sidenav */
-.sidenav {
-  background-color: #fff;
-  color: #333;
-  border-bottom-right-radius: 25px;
-  height: 86%;
-  left: 0;
-  overflow-x: hidden;
-  padding-top: 20px;
+ul.timeline:before {
+  content: ' ';
+  background: #d4d9df;
+  display: inline-block;
   position: absolute;
-  top: 70px;
-  width: 250px;
+  left: 29px;
+  width: 2px;
+  height: 100%;
+  z-index: 400;
 }
-
-.profile {
-  margin-bottom: 20px;
-  margin-top: -12px;
-  text-align: center;
+ul.timeline > li {
+  margin: 20px 0;
+  padding-left: 30px;
 }
-
-.profile img {
+ul.timeline > li:before {
+  content: '\2713';
+  background: #fff;
+  display: inline-block;
+  position: absolute;
   border-radius: 50%;
-  box-shadow: 0px 0px 5px 1px grey;
-}
-
-.name {
-  font-size: 20px;
-  font-weight: bold;
-  padding-top: 20px;
-}
-
-.job {
-  font-size: 16px;
-  font-weight: bold;
-  padding-top: 10px;
-}
-
-.url,
-hr {
+  border: 0;
+  left: 5px;
+  width: 50px;
+  height: 50px;
+  z-index: 400;
   text-align: center;
-}
-
-.url hr {
-  margin-left: 20%;
-  width: 60%;
-}
-
-.url a {
-  color: #818181;
-  display: block;
-  font-size: 20px;
-  margin: 10px 0;
-  padding: 6px 8px;
-  text-decoration: none;
-}
-
-.url a:hover,
-.url .active {
-  background-color: #e8f5ff;
-  border-radius: 28px;
-  color: #000;
-  margin-left: 14%;
-  width: 65%;
-}
-
-/* End */
-
-/* Main */
-.main {
-  margin-top: 2%;
-  margin-left: 29%;
-  font-size: 28px;
-  padding: 0 10px;
-  width: 58%;
-}
-
-.main h2 {
-  color: #333;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 50px;
+  color: #d4d9df;
   font-size: 24px;
-  margin-bottom: 10px;
+  border: 2px solid var(--ogenix-primary);
 }
-
-.main .card {
-  background-color: #fff;
-  border-radius: 18px;
-  box-shadow: 1px 1px 8px 0 grey;
-  height: auto;
-  margin-bottom: 20px;
-  padding: 20px 0 20px 50px;
-}
-
-.main .card table {
-  border: none;
-  font-size: 16px;
-  height: 270px;
-  width: 80%;
-}
-
-.edit {
+ul.timeline > li.active:before {
+  content: '\2713';
+  background: rgb(25 135 84);
+  display: inline-block;
   position: absolute;
-  color: #e7e7e8;
-  right: 14%;
-}
-
-.social-media {
+  border-radius: 50%;
+  border: 0;
+  left: 5px;
+  width: 50px;
+  height: 50px;
+  z-index: 400;
   text-align: center;
-  width: 90%;
+  line-height: 50px;
+  color: #fff;
+  font-size: 30px;
+  border: 2px solid var(--ogenix-primary);
 }
-
-.social-media span {
-  margin: 0 10px;
-}
-
-.fa-facebook:hover {
-  color: #4267b3 !important;
-}
-
-.fa-twitter:hover {
-  color: #1da1f2 !important;
-}
-
-.fa-instagram:hover {
-  color: #ce2b94 !important;
-}
-
-.fa-invision:hover {
-  color: #f83263 !important;
-}
-
-.fa-github:hover {
-  color: #161414 !important;
-}
-
-.fa-whatsapp:hover {
-  color: #25d366 !important;
-}
-
-.fa-snapchat:hover {
-  color: #fffb01 !important;
-}
-
-/* End */
+/* end timeline */

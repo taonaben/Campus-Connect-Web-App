@@ -16,8 +16,7 @@
 					<a href="./accomodation.php">Browse</a>
 					<a href="./location_description.php">Locations</a>
 					<a href="./contact.php">Contact us</a>
-					<a href="./login_form.php">Login</a>
-					<a href="./logout.php">Logout</a>
+					<a href="./profile.php">Profile</a>
 
 				</nav>
 			</div>
