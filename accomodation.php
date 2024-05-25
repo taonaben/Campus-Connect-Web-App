@@ -2,6 +2,10 @@
 // Define the number of cards per page
 $cardsPerPage = 5;
 
+if (!isset($_SESSION['user_id'])) {
+	header("Location: login_form.php");
+}
+
 // Connect to the database (assuming you have a $conn variable already established)
 include 'config.php';
 

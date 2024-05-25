@@ -227,11 +227,6 @@ if (isset($_POST['submit'])) {
 						</select>
 					</div>
 
-					<select name="house_type">
-						<option value="boys">Boys only</option>
-						<option value="girls">Girls only</option>
-						<option value="mixed">Mixed</option>
-					</select>
 
 					<div class="bg-light c-rounded-1 p-3 mb-3">
 						<h5>Room types</h5>

@@ -7,16 +7,16 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_payment'])) {
-  
-    
+
+
     $sql = "INSERT INTO user_form (sub) VALUES (1)";
-    
+
     if ($conn->query($sql) === TRUE) {
         echo "Payment confirmed successfully!";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-    
+
     $conn->close();
 }
 ?>
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_payment'])) {
             </svg>
 
             <div class="heading">
-                <h1>Payment details</h1>
+                <h1>Pay with EcoCash</h1>
             </div>
 
             <table>
@@ -65,18 +65,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_payment'])) {
                 </tr>
             </table>
 
-            <form id="paymentForm" action="process_payment.php" method="post">
+            <form id="paymentForm" action="confirm_payment.php" method="post">
+                <input type="hidden" name="confirm_payment" value="1">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Name" required />
                 <br>
                 <label for="phone">Phone number</label>
                 <input type="text" id="phone" name="phone" placeholder="+263..." required />
                 <br>
-                <input type="hidden" name="submit_payment" value="1">
-                <div class="btn" onclick="document.getElementById('paymentForm').submit();">
-                    <span id="submit">Confirm Payment</span>
-                </div>
-            </form>
+
+                <form action="confirm_payment.php" method="post">
+                    <input type="hidden" name="confirm_payment" value="1">
+                    <button type="submit" class="btn">Confirm Payment</button>
+                </form>
         </div>
     </div>
 </body>
