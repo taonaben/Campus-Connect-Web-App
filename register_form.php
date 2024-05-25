@@ -1,45 +1,18 @@
 <?php
-
+session_start();
 include 'config.php';
 
 if (isset($_POST['submit'])) {
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $phone_number = $_POST['phone_number'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['cpassword'];
-    $user_type = $_POST['user_type'];
-    
+    $_SESSION['name'] = mysqli_real_escape_string($conn, $_POST['name']);
+    $_SESSION['email'] = mysqli_real_escape_string($conn, $_POST['email']);
+    $_SESSION['phone_number'] = $_POST['phone_number'];
+    $_SESSION['password'] = $_POST['password'];
+    $_SESSION['confirm_password'] = $_POST['cpassword'];
+    $_SESSION['user_type'] = $_POST['user_type'];
 
-    // Check if passwords match
-    if ($password != $confirm_password) {
-        $error = 'Passwords do not match!';
-    } else {
-        // Check if user already exists
-        $select_query = "SELECT * FROM user_form WHERE email = '$email'";
-        $result = mysqli_query($conn, $select_query);
-        if (mysqli_num_rows($result) > 0) {
-            $error = 'User already exists!';
-        } else {
-            // Hash the password before storing
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            header('location:ecocash_payment.php');// redirect to payment first
-
-            // Insert user into database
-            $insert_query = "INSERT INTO user_form (name, email, phone_number, password, user_type) VALUES ('$name', '$email', '$phone_number', '$hashed_password', '$user_type')";
-            if (mysqli_query($conn, $insert_query)) {
-                // Registration successful, redirect based on user_type
-                if ($user_type == 'admin') {
-                    header('location:inner_page.php');// redirect to payment
-                } elseif ($user_type == 'user') {
-                    header('location:student_page.php');
-                }
-                exit; // Make sure to exit after redirection
-            } else {
-                $error = 'Error: ' . mysqli_error($conn);
-            }
-        }
-    }
+    // Redirect to payment page
+    header('Location: ecocash_payment.php');
+    exit;
 }
 ?>
 
