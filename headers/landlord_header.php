@@ -1,7 +1,7 @@
 <header class="sticky-top d-flex text-white bg-success">
 	<div class="container">
 		<div class="p-3 d-flex justify-content-between align-items-center">
-			<a href="./index.php" id="logo" class="text-inherit mt-2">
+			<a href="./admin_dashboard.php" id="logo" class="text-inherit mt-2">
 				<h4 class="">
 					<i class="bi bi-house-door-fill"></i>
 					<span>C</span>ampus<span>-C</span>onnect

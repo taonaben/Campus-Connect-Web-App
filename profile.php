@@ -41,8 +41,8 @@ if ($loggedIn) {
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>Profile</title>
-	<link rel="stylesheet" href="assets/css/profile.css" />
-	<link rel="stylesheet" href="assets/css/style.css" />
+	<link rel="stylesheet" href="./assets/css/profile.css" />
+	<link rel="stylesheet" href="./assets/css/style.css" />
 	<style>
 		.list-group-item.active {
 			background: rgb(25 135 84) !important;

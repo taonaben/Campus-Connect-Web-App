@@ -36,15 +36,15 @@
 					<div class="form-inline clearfix">
 						<div class="form-group grid-6">
 							<label for="InputName">Name</label>
-							<input type="text" placeholder="name" id="InputName" name="name" class="form-control" required>
+							<input type="text" placeholder="enter your name" id="InputName" name="name" class="form-control" required>
 						</div>
 						<div class="form-group grid-6">
 							<label for="InputSurname">Surname</label>
-							<input type="text" placeholder="surname" id="InputSurname" name="surname" class="form-control" required>
+							<input type="text" placeholder="enter your surname" id="InputSurname" name="surname" class="form-control" required>
 						</div>
 						<div class="form-group grid-6">
 							<label for="InputEmail">Email</label>
-							<input type="email" placeholder="email address" id="InputEmail" name="email" class="form-control" required>
+							<input type="email" placeholder="enter your email address" id="InputEmail" name="email" class="form-control" required>
 						</div>
 						<div class="form-group grid-6">
 							<label for="InputSubject">Subject</label>

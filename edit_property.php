@@ -101,8 +101,8 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-     <!--START OF HEADER -->
-     <?php include './headers/landlord_header.php' ?>
+    <!--START OF HEADER -->
+    <?php include './headers/landlord_header.php' ?>
     <!--END OF HEADER -->
     <div class="container">
         <h1 class="my-4">Edit Property</h1>
@@ -137,29 +137,6 @@ if (isset($_POST['submit'])) {
                         <textarea name="add_info" class="form-control" placeholder="Additional Information" id="add_info"><?php echo htmlspecialchars($property['add_info']); ?></textarea>
                         <label for="add_info">Additional Information</label>
                     </div>
-                    <div class="bg-light c-rounded-1 p-3 mb-3">
-                        <h5>Upload Images</h5>
-                        <div class="mb-3">
-                            <label for="image1" class="form-label">Image 1</label>
-                            <input class="form-control" type="file" name="image1" id="image1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="image2" class="form-label">Image 2</label>
-                            <input class="form-control" type="file" name="image2" id="image2">
-                        </div>
-                        <div class="mb-3">
-                            <label for="image3" class="form-label">Image 3</label>
-                            <input class="form-control" type="file" name="image3" id="image3">
-                        </div>
-                        <div class="mb-3">
-                            <label for="image4" class="form-label">Image 4</label>
-                            <input class="form-control" type="file" name="image4" id="image4">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-6">
                     <div class="bg-light c-rounded-1 p-3 mb-3">
                         <h5>Room types</h5>
                         <div class="form-check">
@@ -203,10 +180,32 @@ if (isset($_POST['submit'])) {
                             <label class="form-check-label" for="caretaker">Caretaker</label>
                         </div>
                     </div>
+                </div>
+
+
+                <div class="col-lg-6">
+
 
                     <div class="bg-light c-rounded-1 p-3 mb-3">
                         <h5>Upload Images</h5>
-                        
+
+                        <div class="mb-3">
+                            <label for="image1" class="form-label">Image 1</label>
+                            <input class="form-control" type="file" name="image1" id="image1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="image2" class="form-label">Image 2</label>
+                            <input class="form-control" type="file" name="image2" id="image2">
+                        </div>
+                        <div class="mb-3">
+                            <label for="image3" class="form-label">Image 3</label>
+                            <input class="form-control" type="file" name="image3" id="image3">
+                        </div>
+                        <div class="mb-3">
+                            <label for="image4" class="form-label">Image 4</label>
+                            <input class="form-control" type="file" name="image4" id="image4">
+                        </div>
+
                         <div class="mb-3">
                             <label for="image5" class="form-label">Image 5</label>
                             <input class="form-control" type="file" name="image5" id="image5">
@@ -223,7 +222,7 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
             </div>
-            
+
         </form>
     </div>
 
